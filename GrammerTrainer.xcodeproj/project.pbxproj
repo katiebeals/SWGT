@@ -1,0 +1,295 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		5818615614AAAF2100DEA945 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5818615514AAAF2100DEA945 /* UIKit.framework */; };
+		5818615814AAAF2100DEA945 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5818615714AAAF2100DEA945 /* Foundation.framework */; };
+		5818615A14AAAF2100DEA945 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5818615914AAAF2100DEA945 /* CoreGraphics.framework */; };
+		5818616014AAAF2100DEA945 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5818615E14AAAF2100DEA945 /* InfoPlist.strings */; };
+		5818616214AAAF2100DEA945 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5818616114AAAF2100DEA945 /* main.m */; };
+		5818616614AAAF2100DEA945 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5818616514AAAF2100DEA945 /* AppDelegate.m */; };
+		5818616914AAAF2100DEA945 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5818616814AAAF2100DEA945 /* ViewController.m */; };
+		5818616C14AAAF2100DEA945 /* ViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5818616A14AAAF2100DEA945 /* ViewController_iPhone.xib */; };
+		5818616F14AAAF2100DEA945 /* ViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5818616D14AAAF2100DEA945 /* ViewController_iPad.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		5818615114AAAF2100DEA945 /* GrammerTrainer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GrammerTrainer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5818615514AAAF2100DEA945 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		5818615714AAAF2100DEA945 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		5818615914AAAF2100DEA945 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		5818615D14AAAF2100DEA945 /* GrammerTrainer-Info.plist */ = {isa = PBXFileReference; path = "GrammerTrainer-Info.plist"; sourceTree = "<group>"; };
+		5818615F14AAAF2100DEA945 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		5818616114AAAF2100DEA945 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		5818616314AAAF2100DEA945 /* GrammerTrainer-Prefix.pch */ = {isa = PBXFileReference; path = "GrammerTrainer-Prefix.pch"; sourceTree = "<group>"; };
+		5818616414AAAF2100DEA945 /* AppDelegate.h */ = {isa = PBXFileReference; path = AppDelegate.h; sourceTree = "<group>"; };
+		5818616514AAAF2100DEA945 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		5818616714AAAF2100DEA945 /* ViewController.h */ = {isa = PBXFileReference; path = ViewController.h; sourceTree = "<group>"; };
+		5818616814AAAF2100DEA945 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		5818616B14AAAF2100DEA945 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController_iPhone.xib; sourceTree = "<group>"; };
+		5818616E14AAAF2100DEA945 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController_iPad.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5818614E14AAAF2100DEA945 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5818615614AAAF2100DEA945 /* UIKit.framework in Frameworks */,
+				5818615814AAAF2100DEA945 /* Foundation.framework in Frameworks */,
+				5818615A14AAAF2100DEA945 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5818614614AAAF2100DEA945 = {
+			isa = PBXGroup;
+			children = (
+				5818615B14AAAF2100DEA945 /* GrammerTrainer */,
+				5818615414AAAF2100DEA945 /* Frameworks */,
+				5818615214AAAF2100DEA945 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		5818615214AAAF2100DEA945 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5818615114AAAF2100DEA945 /* GrammerTrainer.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5818615414AAAF2100DEA945 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5818615514AAAF2100DEA945 /* UIKit.framework */,
+				5818615714AAAF2100DEA945 /* Foundation.framework */,
+				5818615914AAAF2100DEA945 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5818615B14AAAF2100DEA945 /* GrammerTrainer */ = {
+			isa = PBXGroup;
+			children = (
+				5818616414AAAF2100DEA945 /* AppDelegate.h */,
+				5818616514AAAF2100DEA945 /* AppDelegate.m */,
+				5818616714AAAF2100DEA945 /* ViewController.h */,
+				5818616814AAAF2100DEA945 /* ViewController.m */,
+				5818616A14AAAF2100DEA945 /* ViewController_iPhone.xib */,
+				5818616D14AAAF2100DEA945 /* ViewController_iPad.xib */,
+				5818615C14AAAF2100DEA945 /* Supporting Files */,
+			);
+			path = GrammerTrainer;
+			sourceTree = "<group>";
+		};
+		5818615C14AAAF2100DEA945 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				5818615D14AAAF2100DEA945 /* GrammerTrainer-Info.plist */,
+				5818615E14AAAF2100DEA945 /* InfoPlist.strings */,
+				5818616114AAAF2100DEA945 /* main.m */,
+				5818616314AAAF2100DEA945 /* GrammerTrainer-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5818615014AAAF2100DEA945 /* GrammerTrainer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5818617214AAAF2100DEA945 /* Build configuration list for PBXNativeTarget "GrammerTrainer" */;
+			buildPhases = (
+				5818614D14AAAF2100DEA945 /* Sources */,
+				5818614E14AAAF2100DEA945 /* Frameworks */,
+				5818614F14AAAF2100DEA945 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GrammerTrainer;
+			productName = GrammerTrainer;
+			productReference = 5818615114AAAF2100DEA945 /* GrammerTrainer.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		5818614814AAAF2100DEA945 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
+			buildConfigurationList = 5818614B14AAAF2100DEA945 /* Build configuration list for PBXProject "GrammerTrainer" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 5818614614AAAF2100DEA945;
+			productRefGroup = 5818615214AAAF2100DEA945 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5818615014AAAF2100DEA945 /* GrammerTrainer */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		5818614F14AAAF2100DEA945 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5818616014AAAF2100DEA945 /* InfoPlist.strings in Resources */,
+				5818616C14AAAF2100DEA945 /* ViewController_iPhone.xib in Resources */,
+				5818616F14AAAF2100DEA945 /* ViewController_iPad.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5818614D14AAAF2100DEA945 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5818616214AAAF2100DEA945 /* main.m in Sources */,
+				5818616614AAAF2100DEA945 /* AppDelegate.m in Sources */,
+				5818616914AAAF2100DEA945 /* ViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		5818615E14AAAF2100DEA945 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5818615F14AAAF2100DEA945 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		5818616A14AAAF2100DEA945 /* ViewController_iPhone.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5818616B14AAAF2100DEA945 /* en */,
+			);
+			name = ViewController_iPhone.xib;
+			sourceTree = "<group>";
+		};
+		5818616D14AAAF2100DEA945 /* ViewController_iPad.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5818616E14AAAF2100DEA945 /* en */,
+			);
+			name = ViewController_iPad.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		5818617014AAAF2100DEA945 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		5818617114AAAF2100DEA945 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		5818617314AAAF2100DEA945 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "GrammerTrainer/GrammerTrainer-Prefix.pch";
+				INFOPLIST_FILE = "GrammerTrainer/GrammerTrainer-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		5818617414AAAF2100DEA945 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "GrammerTrainer/GrammerTrainer-Prefix.pch";
+				INFOPLIST_FILE = "GrammerTrainer/GrammerTrainer-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5818614B14AAAF2100DEA945 /* Build configuration list for PBXProject "GrammerTrainer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5818617014AAAF2100DEA945 /* Debug */,
+				5818617114AAAF2100DEA945 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5818617214AAAF2100DEA945 /* Build configuration list for PBXNativeTarget "GrammerTrainer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5818617314AAAF2100DEA945 /* Debug */,
+				5818617414AAAF2100DEA945 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 5818614814AAAF2100DEA945 /* Project object */;
+}

@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController <UIWebViewDelegate, UITableViewDataSource, UITableViewDelegate> 
+
+@property (strong, nonatomic) NSArray *dataModel;
+@property (strong, nonatomic) IBOutlet UIWebView *theWebView;
+@property (strong, nonatomic) IBOutlet UITableView *theTableView;
 
 @end

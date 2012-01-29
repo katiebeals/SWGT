@@ -16,6 +16,10 @@
 		5818616914AAAF2100DEA945 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5818616814AAAF2100DEA945 /* ViewController.m */; };
 		5818616C14AAAF2100DEA945 /* ViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5818616A14AAAF2100DEA945 /* ViewController_iPhone.xib */; };
 		5818616F14AAAF2100DEA945 /* ViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5818616D14AAAF2100DEA945 /* ViewController_iPad.xib */; };
+		5818617714AAB0B600DEA945 /* grammer in Resources */ = {isa = PBXBuildFile; fileRef = 5818617614AAB0B600DEA945 /* grammer */; };
+		5818617914AAB91B00DEA945 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 5818617814AAB91B00DEA945 /* Icon.png */; };
+		5818617B14AAB91F00DEA945 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5818617A14AAB91F00DEA945 /* Icon@2x.png */; };
+		5818617D14AAB97E00DEA945 /* Icon72.png in Resources */ = {isa = PBXBuildFile; fileRef = 5818617C14AAB97E00DEA945 /* Icon72.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,16 +27,20 @@
 		5818615514AAAF2100DEA945 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		5818615714AAAF2100DEA945 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		5818615914AAAF2100DEA945 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		5818615D14AAAF2100DEA945 /* GrammerTrainer-Info.plist */ = {isa = PBXFileReference; path = "GrammerTrainer-Info.plist"; sourceTree = "<group>"; };
+		5818615D14AAAF2100DEA945 /* GrammerTrainer-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GrammerTrainer-Info.plist"; sourceTree = "<group>"; };
 		5818615F14AAAF2100DEA945 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5818616114AAAF2100DEA945 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		5818616314AAAF2100DEA945 /* GrammerTrainer-Prefix.pch */ = {isa = PBXFileReference; path = "GrammerTrainer-Prefix.pch"; sourceTree = "<group>"; };
-		5818616414AAAF2100DEA945 /* AppDelegate.h */ = {isa = PBXFileReference; path = AppDelegate.h; sourceTree = "<group>"; };
+		5818616314AAAF2100DEA945 /* GrammerTrainer-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GrammerTrainer-Prefix.pch"; sourceTree = "<group>"; };
+		5818616414AAAF2100DEA945 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		5818616514AAAF2100DEA945 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		5818616714AAAF2100DEA945 /* ViewController.h */ = {isa = PBXFileReference; path = ViewController.h; sourceTree = "<group>"; };
+		5818616714AAAF2100DEA945 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		5818616814AAAF2100DEA945 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		5818616B14AAAF2100DEA945 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController_iPhone.xib; sourceTree = "<group>"; };
 		5818616E14AAAF2100DEA945 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController_iPad.xib; sourceTree = "<group>"; };
+		5818617614AAB0B600DEA945 /* grammer */ = {isa = PBXFileReference; lastKnownFileType = folder; name = grammer; path = GrammerTrainer/grammer; sourceTree = "<group>"; };
+		5818617814AAB91B00DEA945 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		5818617A14AAB91F00DEA945 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		5818617C14AAB97E00DEA945 /* Icon72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon72.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +60,10 @@
 		5818614614AAAF2100DEA945 = {
 			isa = PBXGroup;
 			children = (
+				5818617C14AAB97E00DEA945 /* Icon72.png */,
+				5818617A14AAB91F00DEA945 /* Icon@2x.png */,
+				5818617814AAB91B00DEA945 /* Icon.png */,
+				5818617514AAB07800DEA945 /* Web Content */,
 				5818615B14AAAF2100DEA945 /* GrammerTrainer */,
 				5818615414AAAF2100DEA945 /* Frameworks */,
 				5818615214AAAF2100DEA945 /* Products */,
@@ -99,6 +111,14 @@
 				5818616314AAAF2100DEA945 /* GrammerTrainer-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5818617514AAB07800DEA945 /* Web Content */ = {
+			isa = PBXGroup;
+			children = (
+				5818617614AAB0B600DEA945 /* grammer */,
+			);
+			name = "Web Content";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -154,6 +174,10 @@
 				5818616014AAAF2100DEA945 /* InfoPlist.strings in Resources */,
 				5818616C14AAAF2100DEA945 /* ViewController_iPhone.xib in Resources */,
 				5818616F14AAAF2100DEA945 /* ViewController_iPad.xib in Resources */,
+				5818617714AAB0B600DEA945 /* grammer in Resources */,
+				5818617914AAB91B00DEA945 /* Icon.png in Resources */,
+				5818617B14AAB91F00DEA945 /* Icon@2x.png in Resources */,
+				5818617D14AAB97E00DEA945 /* Icon72.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,6 +312,7 @@
 				5818617414AAAF2100DEA945 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

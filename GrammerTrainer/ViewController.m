@@ -22,7 +22,36 @@
 
 #pragma mark - Helper Methods
 
+- (void)showMenu {
+    
+    // This is really means toggle menu
+    
+    CGRect newFrame;
+    
+    if (menuVisible) {
+        newFrame = CGRectOffset(_theTableView.frame, -_theTableView.bounds.size.width, 0.0);
+        menuVisible = NO;
+    } else {
+        newFrame = CGRectOffset(_theTableView.frame, _theTableView.bounds.size.width, 0.0);
+        menuVisible = YES;
+    }
+    
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        _theTableView.frame = newFrame;
+        
+    }];
+    
+    
+}
+
 - (void)loadInstructionsVideo {
+    
+    
+        
+        
+    [self showMenu];
+        
     
     NSString *thePathURL = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"grammer/gt_instructions.html"];
     
@@ -32,7 +61,34 @@
 
 }
 
+
+
+- (void)copyOverLesson:(int)lesson {
+    
+    
+    NSFileManager *fileMgr = [NSFileManager defaultManager];
+    
+    // Remote dataModel.js  from ./grammer directory
+    // Copy lesson_x.js to ./grammer/dataModel.js
+    
+
+    NSString *lessonFile = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"lesson_%d", lesson] ofType:@"js"];
+
+    NSString *grammerDir = [NSHomeDirectory() stringByAppendingPathComponent:  @"Documents/grammer"];
+    NSString *dest = [grammerDir stringByAppendingPathComponent:[NSString stringWithFormat:@"datamodel.js", lesson]];
+
+    [fileMgr removeItemAtPath:dest error:nil];
+    
+    NSError *error = nil;
+    
+    [fileMgr copyItemAtPath:lessonFile toPath:dest error:&error];
+    
+}
+
 - (void)loadLesson:(NSInteger)lessonNumber {
+    
+    
+    [self showMenu]; // toggle menu
     
     NSString *thePathURL = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"grammer/gt_main.html"];
     
@@ -40,18 +96,56 @@
     
     [_theWebView loadRequest:theRequest];
     
+    [self copyOverLesson:lessonNumber];
+     
+     // Reinitialize data model
+    
+     NSString *path = [[NSBundle mainBundle] pathForResource:@"initDataModel" ofType:@"js"];
+     
+     NSString *javascriptString = [NSString stringWithContentsOfFile:path encoding:NSASCIIStringEncoding error:nil];
+     
+     
+     // We need to perform selector with afterDelay 0 in order to avoid weird recursion stop
+     // when calling NativeBridge in a recursion more then 200 times :s (fails ont 201th calls!!!)
+     [self performSelector:@selector(returnResultAfterDelay:) withObject:javascriptString afterDelay:0.5];
+     
+     
 }
 
+
 #pragma mark - View lifecycle
+
+- (void)copyWebSiteFromBundle {
+    
+    
+    NSString *grammerDir = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"grammer"];
+    NSFileManager *fileMgr = [NSFileManager defaultManager];
+        
+    NSString *docsDir = [NSHomeDirectory() stringByAppendingPathComponent:  @"Documents/grammer"];
+    
+    NSError *error = nil;
+    
+    [fileMgr copyItemAtPath:grammerDir toPath:docsDir error:&error];
+    
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
+    menuVisible = YES;
+    
+    [self copyWebSiteFromBundle];
+    
+    // Instanciate JSON parser library
+    json = [ SBJSON new ];
+
     
     _dataModel = [[NSArray alloc] initWithObjects:@"Instructions", @"Lesson 1",@"Lesson 2", nil];
 }
+
+
 
 - (void)viewDidUnload
 {
@@ -171,7 +265,6 @@
      // Pass the selected object to the new view controller.
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
-    [_theTableView setHidden:YES];
 
     switch (indexPath.row) {
         case 0: {
@@ -193,6 +286,88 @@
     
 
 }
+
+
+
+#pragma Native Web Interface
+
+// Call this function when you have results to send back to javascript callbacks
+// callbackId : int comes from handleCall function
+// args: list of objects to send to the javascript callback
+- (void)returnResult:(int)callbackId args:(id)arg, ...;
+{
+    if (callbackId==0) return;
+    
+    va_list argsList;
+    NSMutableArray *resultArray = [[NSMutableArray alloc] init];
+    
+    if(arg != nil){
+        [resultArray addObject:arg];
+        va_start(argsList, arg);
+        while((arg = va_arg(argsList, id)) != nil)
+            [resultArray addObject:arg];
+        va_end(argsList);
+    }
+    
+    NSError* error = nil;
+    
+    NSString *resultArrayString = [json stringWithObject:resultArray allowScalar:YES error:&error];
+
+    
+    //DLog(@"resultArrayString: %@", resultArrayString);
+    
+    //DLog(@"returnResult for callbackID: %d result:%@", callbackId,resultArrayString);
+    
+    // We need to perform selector with afterDelay 0 in order to avoid weird recursion stop
+    // when calling NativeBridge in a recursion more then 200 times :s (fails ont 201th calls!!!)
+    [self performSelector:@selector(returnResultAfterDelay:) withObject:[NSString stringWithFormat:@"nativeBridge.resultForCallback(%d,%@);",callbackId,resultArrayString] afterDelay:0];
+}
+
+-(void)returnResultAfterDelay:(NSString*)str {
+    // Now perform this selector with waitUntilDone:NO in order to get a huge speed boost! (about 3x faster on simulator!!!)
+    [self.theWebView performSelectorOnMainThread:@selector(stringByEvaluatingJavaScriptFromString:) withObject:str waitUntilDone:NO];
+}
+
+// Implements all you native function in this one, by matching 'functionName' and parsing 'args'
+// Use 'callbackId' with 'returnResult' selector when you get some results to send back to javascript
+- (void)handleCall:(NSString*)functionName callbackId:(int)callbackId args:(NSArray*)args
+{
+    if ([functionName isEqualToString:@"showMenu"]) {
+        
+        NSLog(@"Did call showMenu");
+        [self showMenu];
+
+    }  else {
+        NSLog(@"Unimplemented method '%@'",functionName);
+    }
+}
+
+#pragma UIWebview Delegate 
+
+- (BOOL)webView:(UIWebView *)webView2 shouldStartLoadWithRequest:(NSURLRequest *)request  navigationType:(UIWebViewNavigationType)navigationType {
+    
+	NSString *requestString = [[request URL] absoluteString];
+    
+    NSLog(@"request : %@",requestString);
+    
+    if ([requestString hasPrefix:@"js-frame:"]) {
+        
+        NSArray *components = [requestString componentsSeparatedByString:@":"];
+        
+        NSString *function = (NSString*)[components objectAtIndex:1];
+		int callbackId = [((NSString*)[components objectAtIndex:2]) intValue];
+        NSString *argsAsString = [(NSString*)[components objectAtIndex:3] 
+                                  stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        NSArray *args = (NSArray*)[json objectWithString:argsAsString error:nil];
+        
+        [self handleCall:function callbackId:callbackId args:args];
+        
+        return NO;
+    }
+    
+    return YES;
+}
+
 
 
 @end

@@ -20,6 +20,17 @@
 		5818617914AAB91B00DEA945 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 5818617814AAB91B00DEA945 /* Icon.png */; };
 		5818617B14AAB91F00DEA945 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5818617A14AAB91F00DEA945 /* Icon@2x.png */; };
 		5818617D14AAB97E00DEA945 /* Icon72.png in Resources */ = {isa = PBXBuildFile; fileRef = 5818617C14AAB97E00DEA945 /* Icon72.png */; };
+		58783AFB14D5A04D001DE059 /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 58783AF014D5A04D001DE059 /* NSObject+SBJSON.m */; };
+		58783AFC14D5A04D001DE059 /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 58783AF214D5A04D001DE059 /* NSString+SBJSON.m */; };
+		58783AFD14D5A04D001DE059 /* SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 58783AF414D5A04D001DE059 /* SBJSON.m */; };
+		58783AFE14D5A04D001DE059 /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 58783AF614D5A04D001DE059 /* SBJsonBase.m */; };
+		58783AFF14D5A04D001DE059 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 58783AF814D5A04D001DE059 /* SBJsonParser.m */; };
+		58783B0014D5A04D001DE059 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 58783AFA14D5A04D001DE059 /* SBJsonWriter.m */; };
+		58783B0314D5CC45001DE059 /* initDataModel.js in Resources */ = {isa = PBXBuildFile; fileRef = 58783B0114D5CC21001DE059 /* initDataModel.js */; };
+		58783B2014D643C1001DE059 /* grammerManifest.plist in Resources */ = {isa = PBXBuildFile; fileRef = 58783B1F14D643C1001DE059 /* grammerManifest.plist */; };
+		58E69C8B14DA30E200D3FB8D /* lesson_3.js in Resources */ = {isa = PBXBuildFile; fileRef = 58E69C8414DA30CC00D3FB8D /* lesson_3.js */; };
+		58E69C8C14DA30E200D3FB8D /* lesson_2.js in Resources */ = {isa = PBXBuildFile; fileRef = 58E69C8514DA30CC00D3FB8D /* lesson_2.js */; };
+		58E69C8D14DA30E200D3FB8D /* lesson_1.js in Resources */ = {isa = PBXBuildFile; fileRef = 58E69C8614DA30CC00D3FB8D /* lesson_1.js */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +52,24 @@
 		5818617814AAB91B00DEA945 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		5818617A14AAB91F00DEA945 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		5818617C14AAB97E00DEA945 /* Icon72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon72.png; sourceTree = "<group>"; };
+		58783AEE14D5A04D001DE059 /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
+		58783AEF14D5A04D001DE059 /* NSObject+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJSON.h"; sourceTree = "<group>"; };
+		58783AF014D5A04D001DE059 /* NSObject+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SBJSON.m"; sourceTree = "<group>"; };
+		58783AF114D5A04D001DE059 /* NSString+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SBJSON.h"; sourceTree = "<group>"; };
+		58783AF214D5A04D001DE059 /* NSString+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SBJSON.m"; sourceTree = "<group>"; };
+		58783AF314D5A04D001DE059 /* SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJSON.h; sourceTree = "<group>"; };
+		58783AF414D5A04D001DE059 /* SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJSON.m; sourceTree = "<group>"; };
+		58783AF514D5A04D001DE059 /* SBJsonBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonBase.h; sourceTree = "<group>"; };
+		58783AF614D5A04D001DE059 /* SBJsonBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonBase.m; sourceTree = "<group>"; };
+		58783AF714D5A04D001DE059 /* SBJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonParser.h; sourceTree = "<group>"; };
+		58783AF814D5A04D001DE059 /* SBJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonParser.m; sourceTree = "<group>"; };
+		58783AF914D5A04D001DE059 /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
+		58783AFA14D5A04D001DE059 /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
+		58783B0114D5CC21001DE059 /* initDataModel.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = initDataModel.js; sourceTree = "<group>"; };
+		58783B1F14D643C1001DE059 /* grammerManifest.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = grammerManifest.plist; sourceTree = "<group>"; };
+		58E69C8414DA30CC00D3FB8D /* lesson_3.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = lesson_3.js; path = GrammerTrainer/grammer/lesson_3.js; sourceTree = "<group>"; };
+		58E69C8514DA30CC00D3FB8D /* lesson_2.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = lesson_2.js; path = GrammerTrainer/grammer/lesson_2.js; sourceTree = "<group>"; };
+		58E69C8614DA30CC00D3FB8D /* lesson_1.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = lesson_1.js; path = GrammerTrainer/grammer/lesson_1.js; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +89,11 @@
 		5818614614AAAF2100DEA945 = {
 			isa = PBXGroup;
 			children = (
+				58E69C8414DA30CC00D3FB8D /* lesson_3.js */,
+				58E69C8514DA30CC00D3FB8D /* lesson_2.js */,
+				58E69C8614DA30CC00D3FB8D /* lesson_1.js */,
+				58783B1F14D643C1001DE059 /* grammerManifest.plist */,
+				58783AED14D5A03B001DE059 /* JSON */,
 				5818617C14AAB97E00DEA945 /* Icon72.png */,
 				5818617A14AAB91F00DEA945 /* Icon@2x.png */,
 				5818617814AAB91B00DEA945 /* Icon.png */,
@@ -116,9 +150,30 @@
 		5818617514AAB07800DEA945 /* Web Content */ = {
 			isa = PBXGroup;
 			children = (
+				58783B0114D5CC21001DE059 /* initDataModel.js */,
 				5818617614AAB0B600DEA945 /* grammer */,
 			);
 			name = "Web Content";
+			sourceTree = "<group>";
+		};
+		58783AED14D5A03B001DE059 /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+				58783AEE14D5A04D001DE059 /* JSON.h */,
+				58783AEF14D5A04D001DE059 /* NSObject+SBJSON.h */,
+				58783AF014D5A04D001DE059 /* NSObject+SBJSON.m */,
+				58783AF114D5A04D001DE059 /* NSString+SBJSON.h */,
+				58783AF214D5A04D001DE059 /* NSString+SBJSON.m */,
+				58783AF314D5A04D001DE059 /* SBJSON.h */,
+				58783AF414D5A04D001DE059 /* SBJSON.m */,
+				58783AF514D5A04D001DE059 /* SBJsonBase.h */,
+				58783AF614D5A04D001DE059 /* SBJsonBase.m */,
+				58783AF714D5A04D001DE059 /* SBJsonParser.h */,
+				58783AF814D5A04D001DE059 /* SBJsonParser.m */,
+				58783AF914D5A04D001DE059 /* SBJsonWriter.h */,
+				58783AFA14D5A04D001DE059 /* SBJsonWriter.m */,
+			);
+			name = JSON;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -171,6 +226,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				58E69C8B14DA30E200D3FB8D /* lesson_3.js in Resources */,
+				58E69C8C14DA30E200D3FB8D /* lesson_2.js in Resources */,
+				58E69C8D14DA30E200D3FB8D /* lesson_1.js in Resources */,
+				58783B0314D5CC45001DE059 /* initDataModel.js in Resources */,
 				5818616014AAAF2100DEA945 /* InfoPlist.strings in Resources */,
 				5818616C14AAAF2100DEA945 /* ViewController_iPhone.xib in Resources */,
 				5818616F14AAAF2100DEA945 /* ViewController_iPad.xib in Resources */,
@@ -178,6 +237,7 @@
 				5818617914AAB91B00DEA945 /* Icon.png in Resources */,
 				5818617B14AAB91F00DEA945 /* Icon@2x.png in Resources */,
 				5818617D14AAB97E00DEA945 /* Icon72.png in Resources */,
+				58783B2014D643C1001DE059 /* grammerManifest.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -191,6 +251,12 @@
 				5818616214AAAF2100DEA945 /* main.m in Sources */,
 				5818616614AAAF2100DEA945 /* AppDelegate.m in Sources */,
 				5818616914AAAF2100DEA945 /* ViewController.m in Sources */,
+				58783AFB14D5A04D001DE059 /* NSObject+SBJSON.m in Sources */,
+				58783AFC14D5A04D001DE059 /* NSString+SBJSON.m in Sources */,
+				58783AFD14D5A04D001DE059 /* SBJSON.m in Sources */,
+				58783AFE14D5A04D001DE059 /* SBJsonBase.m in Sources */,
+				58783AFF14D5A04D001DE059 /* SBJsonParser.m in Sources */,
+				58783B0014D5A04D001DE059 /* SBJsonWriter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

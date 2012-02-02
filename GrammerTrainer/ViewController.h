@@ -7,8 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SBJSON.h"
 
-@interface ViewController : UIViewController <UIWebViewDelegate, UITableViewDataSource, UITableViewDelegate> 
+@interface ViewController : UIViewController <UIWebViewDelegate, UITableViewDataSource, UITableViewDelegate> {
+    
+    SBJSON *json;
+    BOOL menuVisible;
+
+}
 
 @property (strong, nonatomic) NSArray *dataModel;
 @property (strong, nonatomic) IBOutlet UIWebView *theWebView;

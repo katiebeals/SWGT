@@ -98,9 +98,9 @@ for( var d = 0; d < dotMatrix.length; d++ )
 for(var answerChoice = 0; answerChoice < randomizedMultipleChoices[currentExerciseNumber-1].length; answerChoice++)
 {
     //document.write("<p>" + randomizedMultipleChoices[currentExerciseNumber-1][answerChoice] + "</p>");
-
+    
 	$("#presentedChoices").append("<p>" + randomizedMultipleChoices[currentExerciseNumber-1][answerChoice] + "</p>");
-
+    
 }
 
 

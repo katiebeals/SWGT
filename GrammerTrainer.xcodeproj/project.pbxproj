@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5809532814E6CFA400740756 /* SectionInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5809532514E6CFA400740756 /* SectionInfo.m */; };
+		5809532914E6CFA400740756 /* SectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5809532714E6CFA400740756 /* SectionHeaderView.m */; };
+		5809532F14E6CFC400740756 /* QuoteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5809532C14E6CFC400740756 /* QuoteCell.m */; };
+		5809533014E6CFC400740756 /* HighlightingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5809532E14E6CFC400740756 /* HighlightingTextView.m */; };
+		5809533614E6CFFA00740756 /* Module.m in Sources */ = {isa = PBXBuildFile; fileRef = 5809533314E6CFFA00740756 /* Module.m */; };
+		5809533714E6CFFA00740756 /* Lesson.m in Sources */ = {isa = PBXBuildFile; fileRef = 5809533514E6CFFA00740756 /* Lesson.m */; };
+		5809533A14E6D01300740756 /* carat.png in Resources */ = {isa = PBXBuildFile; fileRef = 5809533814E6D01300740756 /* carat.png */; };
+		5809533B14E6D01300740756 /* carat-open.png in Resources */ = {isa = PBXBuildFile; fileRef = 5809533914E6D01300740756 /* carat-open.png */; };
+		5809533D14E6D06000740756 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5809533C14E6D06000740756 /* QuartzCore.framework */; };
 		5818615614AAAF2100DEA945 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5818615514AAAF2100DEA945 /* UIKit.framework */; };
 		5818615814AAAF2100DEA945 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5818615714AAAF2100DEA945 /* Foundation.framework */; };
 		5818615A14AAAF2100DEA945 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5818615914AAAF2100DEA945 /* CoreGraphics.framework */; };
@@ -20,6 +29,7 @@
 		5818617914AAB91B00DEA945 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 5818617814AAB91B00DEA945 /* Icon.png */; };
 		5818617B14AAB91F00DEA945 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5818617A14AAB91F00DEA945 /* Icon@2x.png */; };
 		5818617D14AAB97E00DEA945 /* Icon72.png in Resources */ = {isa = PBXBuildFile; fileRef = 5818617C14AAB97E00DEA945 /* Icon72.png */; };
+		5825CBA614E702D200467271 /* QuoteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5825CBA514E702D200467271 /* QuoteCell.xib */; };
 		58783AFB14D5A04D001DE059 /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 58783AF014D5A04D001DE059 /* NSObject+SBJSON.m */; };
 		58783AFC14D5A04D001DE059 /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 58783AF214D5A04D001DE059 /* NSString+SBJSON.m */; };
 		58783AFD14D5A04D001DE059 /* SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 58783AF414D5A04D001DE059 /* SBJSON.m */; };
@@ -31,9 +41,25 @@
 		58E69C8B14DA30E200D3FB8D /* lesson_3.js in Resources */ = {isa = PBXBuildFile; fileRef = 58E69C8414DA30CC00D3FB8D /* lesson_3.js */; };
 		58E69C8C14DA30E200D3FB8D /* lesson_2.js in Resources */ = {isa = PBXBuildFile; fileRef = 58E69C8514DA30CC00D3FB8D /* lesson_2.js */; };
 		58E69C8D14DA30E200D3FB8D /* lesson_1.js in Resources */ = {isa = PBXBuildFile; fileRef = 58E69C8614DA30CC00D3FB8D /* lesson_1.js */; };
+		58E69CA714DB95C600D3FB8D /* WelcomeToGM.png in Resources */ = {isa = PBXBuildFile; fileRef = 58E69CA614DB95C600D3FB8D /* WelcomeToGM.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5809532414E6CFA400740756 /* SectionInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SectionInfo.h; sourceTree = "<group>"; };
+		5809532514E6CFA400740756 /* SectionInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SectionInfo.m; sourceTree = "<group>"; };
+		5809532614E6CFA400740756 /* SectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SectionHeaderView.h; sourceTree = "<group>"; };
+		5809532714E6CFA400740756 /* SectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SectionHeaderView.m; sourceTree = "<group>"; };
+		5809532B14E6CFC400740756 /* QuoteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuoteCell.h; sourceTree = "<group>"; };
+		5809532C14E6CFC400740756 /* QuoteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = QuoteCell.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		5809532D14E6CFC400740756 /* HighlightingTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HighlightingTextView.h; sourceTree = "<group>"; };
+		5809532E14E6CFC400740756 /* HighlightingTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HighlightingTextView.m; sourceTree = "<group>"; };
+		5809533214E6CFFA00740756 /* Module.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = Module.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		5809533314E6CFFA00740756 /* Module.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Module.m; sourceTree = "<group>"; };
+		5809533514E6CFFA00740756 /* Lesson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = Lesson.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		5809533814E6D01300740756 /* carat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = carat.png; sourceTree = "<group>"; };
+		5809533914E6D01300740756 /* carat-open.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "carat-open.png"; sourceTree = "<group>"; };
+		5809533C14E6D06000740756 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		5809533E14E6D35B00740756 /* Lesson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Lesson.h; sourceTree = "<group>"; };
 		5818615114AAAF2100DEA945 /* GrammerTrainer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GrammerTrainer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5818615514AAAF2100DEA945 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		5818615714AAAF2100DEA945 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -43,7 +69,7 @@
 		5818616114AAAF2100DEA945 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5818616314AAAF2100DEA945 /* GrammerTrainer-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GrammerTrainer-Prefix.pch"; sourceTree = "<group>"; };
 		5818616414AAAF2100DEA945 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		5818616514AAAF2100DEA945 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		5818616514AAAF2100DEA945 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AppDelegate.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		5818616714AAAF2100DEA945 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		5818616814AAAF2100DEA945 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		5818616B14AAAF2100DEA945 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController_iPhone.xib; sourceTree = "<group>"; };
@@ -52,6 +78,7 @@
 		5818617814AAB91B00DEA945 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		5818617A14AAB91F00DEA945 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		5818617C14AAB97E00DEA945 /* Icon72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon72.png; sourceTree = "<group>"; };
+		5825CBA514E702D200467271 /* QuoteCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuoteCell.xib; sourceTree = "<group>"; };
 		58783AEE14D5A04D001DE059 /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
 		58783AEF14D5A04D001DE059 /* NSObject+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJSON.h"; sourceTree = "<group>"; };
 		58783AF014D5A04D001DE059 /* NSObject+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SBJSON.m"; sourceTree = "<group>"; };
@@ -70,6 +97,7 @@
 		58E69C8414DA30CC00D3FB8D /* lesson_3.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = lesson_3.js; path = GrammerTrainer/grammer/lesson_3.js; sourceTree = "<group>"; };
 		58E69C8514DA30CC00D3FB8D /* lesson_2.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = lesson_2.js; path = GrammerTrainer/grammer/lesson_2.js; sourceTree = "<group>"; };
 		58E69C8614DA30CC00D3FB8D /* lesson_1.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = lesson_1.js; path = GrammerTrainer/grammer/lesson_1.js; sourceTree = "<group>"; };
+		58E69CA614DB95C600D3FB8D /* WelcomeToGM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WelcomeToGM.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +105,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5809533D14E6D06000740756 /* QuartzCore.framework in Frameworks */,
 				5818615614AAAF2100DEA945 /* UIKit.framework in Frameworks */,
 				5818615814AAAF2100DEA945 /* Foundation.framework in Frameworks */,
 				5818615A14AAAF2100DEA945 /* CoreGraphics.framework in Frameworks */,
@@ -86,9 +115,48 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5809532214E6CF8A00740756 /* TableView */ = {
+			isa = PBXGroup;
+			children = (
+				5809533114E6CFD600740756 /* Model Classes */,
+				5809532A14E6CFB400740756 /* Cells */,
+				5809532414E6CFA400740756 /* SectionInfo.h */,
+				5809532514E6CFA400740756 /* SectionInfo.m */,
+				5809532614E6CFA400740756 /* SectionHeaderView.h */,
+				5809532714E6CFA400740756 /* SectionHeaderView.m */,
+			);
+			name = TableView;
+			sourceTree = "<group>";
+		};
+		5809532A14E6CFB400740756 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				5809533814E6D01300740756 /* carat.png */,
+				5809533914E6D01300740756 /* carat-open.png */,
+				5809532B14E6CFC400740756 /* QuoteCell.h */,
+				5809532C14E6CFC400740756 /* QuoteCell.m */,
+				5825CBA514E702D200467271 /* QuoteCell.xib */,
+				5809532D14E6CFC400740756 /* HighlightingTextView.h */,
+				5809532E14E6CFC400740756 /* HighlightingTextView.m */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
+		5809533114E6CFD600740756 /* Model Classes */ = {
+			isa = PBXGroup;
+			children = (
+				5809533E14E6D35B00740756 /* Lesson.h */,
+				5809533214E6CFFA00740756 /* Module.h */,
+				5809533314E6CFFA00740756 /* Module.m */,
+				5809533514E6CFFA00740756 /* Lesson.m */,
+			);
+			name = "Model Classes";
+			sourceTree = "<group>";
+		};
 		5818614614AAAF2100DEA945 = {
 			isa = PBXGroup;
 			children = (
+				58E69CA614DB95C600D3FB8D /* WelcomeToGM.png */,
 				58E69C8414DA30CC00D3FB8D /* lesson_3.js */,
 				58E69C8514DA30CC00D3FB8D /* lesson_2.js */,
 				58E69C8614DA30CC00D3FB8D /* lesson_1.js */,
@@ -115,6 +183,7 @@
 		5818615414AAAF2100DEA945 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5809533C14E6D06000740756 /* QuartzCore.framework */,
 				5818615514AAAF2100DEA945 /* UIKit.framework */,
 				5818615714AAAF2100DEA945 /* Foundation.framework */,
 				5818615914AAAF2100DEA945 /* CoreGraphics.framework */,
@@ -125,6 +194,7 @@
 		5818615B14AAAF2100DEA945 /* GrammerTrainer */ = {
 			isa = PBXGroup;
 			children = (
+				5809532214E6CF8A00740756 /* TableView */,
 				5818616414AAAF2100DEA945 /* AppDelegate.h */,
 				5818616514AAAF2100DEA945 /* AppDelegate.m */,
 				5818616714AAAF2100DEA945 /* ViewController.h */,
@@ -238,6 +308,10 @@
 				5818617B14AAB91F00DEA945 /* Icon@2x.png in Resources */,
 				5818617D14AAB97E00DEA945 /* Icon72.png in Resources */,
 				58783B2014D643C1001DE059 /* grammerManifest.plist in Resources */,
+				58E69CA714DB95C600D3FB8D /* WelcomeToGM.png in Resources */,
+				5809533A14E6D01300740756 /* carat.png in Resources */,
+				5809533B14E6D01300740756 /* carat-open.png in Resources */,
+				5825CBA614E702D200467271 /* QuoteCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -257,6 +331,12 @@
 				58783AFE14D5A04D001DE059 /* SBJsonBase.m in Sources */,
 				58783AFF14D5A04D001DE059 /* SBJsonParser.m in Sources */,
 				58783B0014D5A04D001DE059 /* SBJsonWriter.m in Sources */,
+				5809532814E6CFA400740756 /* SectionInfo.m in Sources */,
+				5809532914E6CFA400740756 /* SectionHeaderView.m in Sources */,
+				5809532F14E6CFC400740756 /* QuoteCell.m in Sources */,
+				5809533014E6CFC400740756 /* HighlightingTextView.m in Sources */,
+				5809533614E6CFFA00740756 /* Module.m in Sources */,
+				5809533714E6CFFA00740756 /* Lesson.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

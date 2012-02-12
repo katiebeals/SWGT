@@ -9,11 +9,21 @@
 #import "AppDelegate.h"
 
 #import "ViewController.h"
+#import "Module.h"
+#import "Lesson.h"
+
+@interface AppDelegate ()
+
+@property (nonatomic, strong) NSArray *modules;
+- (void)setUpModulesArray;
+
+@end
 
 @implementation AppDelegate
 
-@synthesize window = _window;
+@synthesize window = _window, modules=modules_;
 @synthesize viewController = _viewController;
+
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -24,10 +34,59 @@
     } else {
         self.viewController = [[ViewController alloc] initWithNibName:@"ViewController_iPad" bundle:nil];
     }
+    
+    /*
+     Get the plays and quotations data from the plist, then pass the array on to the table view controller.
+     */
+    [self setUpModulesArray];
+    
+    self.viewController.modules = self.modules;
+
+    
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
     return YES;
 }
+
+- (void)setUpModulesArray {
+    
+    NSURL *url = [[NSBundle mainBundle] URLForResource:@"grammerManifest" withExtension:@"plist"];
+    
+    NSArray *levelsDictionariesArray = [[NSArray alloc ] initWithContentsOfURL:url];
+
+    // For now were just looking at the first level
+    NSDictionary *moduleDictionary = [levelsDictionariesArray objectAtIndex:0];
+
+    NSArray *moduleDictionariesArray = [moduleDictionary objectForKey:@"modules"];
+
+    // This will hold the Module objects we create in the loop
+    NSMutableArray *modulesArray = [NSMutableArray arrayWithCapacity:[moduleDictionariesArray count]];
+    
+    for (NSDictionary *moduleDictionary in moduleDictionariesArray) {
+        
+        Module *module = [[Module alloc] init];
+        module.name = [moduleDictionary objectForKey:@"moduleName"];
+        
+        NSArray *lessonDictionaries = [moduleDictionary objectForKey:@"lessons"];
+        
+        // This will hold the Lesson objects we create in the loop
+        NSMutableArray *lessons = [NSMutableArray arrayWithCapacity:[lessonDictionaries count]];
+        
+        for (NSDictionary *lessonDictionary in lessonDictionaries) {
+            
+            Lesson *lesson = [[Lesson alloc] init];
+            [lesson setValuesForKeysWithDictionary:lessonDictionary];
+            
+            [lessons addObject:lesson];
+        }
+        module.lessons = lessons;
+        
+        [modulesArray addObject:module];
+    }
+    
+    self.modules = modulesArray;
+}
+
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {

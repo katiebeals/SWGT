@@ -1,217 +1,260 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-<dict>
-	<key>description</key>
-	<string>This is the whole enchilada</string>
-	<key>levels</key>
-	<array>
-		<dict>
-			<key>description</key>
-			<string>Level 1</string>
-			<key>topic</key>
-			<string>This is a description of Level 1 content</string>
-			<key>modules</key>
-			<array>
+<array>
+	<dict>
+		<key>levelName</key>
+		<string>Level 1</string>
+		<key>topic</key>
+		<string>This is a description of Level 1 content</string>
+		<key>modules</key>
+		<array>
+			<dict>
+				<key>moduleName</key>
+				<string>Module 1</string>
+				<key>topic</key>
+				<string>This is a description of Module 1 content</string>
+				<key>pretest</key>
 				<dict>
-					<key>description</key>
-					<string>Module 1</string>
-					<key>topic</key>
-					<string>This is a description of Module 1 content</string>
-					<key>pretest</key>
-					<dict>
-						<key>description</key>
-						<string>Pre-Test</string>
-						<key>loadFile</key>
-						<string>pretest_mod1.js</string>
-					</dict>
-					<key>posttest</key>
-					<dict>
-						<key>description</key>
-						<string>Post-Test</string>
-						<key>loadFile</key>
-						<string>posttest_mod1.js</string>
-					</dict>
-					<key>lessons</key>
-					<array>
-						<dict>
-							<key>description</key>
-							<string>Lesson 1</string>
-							<key>topic</key>
-							<string>Transportation</string>
-							<key>loadFile</key>
-							<string>lesson_1.js</string>
-						</dict>
-						<dict>
-							<key>description</key>
-							<string>Lesson 2</string>
-							<key>topic</key>
-							<string>Amusement Park</string>
-							<key>loadFile</key>
-							<string>lesson_2.js</string>
-						</dict>
-						<dict>
-							<key>description</key>
-							<string>Lesson 3</string>
-							<key>topic</key>
-							<string>School</string>
-							<key>loadFile</key>
-							<string>lesson_3.js</string>
-						</dict>
-					</array>
+					<key>lessonName</key>
+					<string>Pre-Test</string>
+					<key>loadFile</key>
+					<string>pretest_mod1.js</string>
 				</dict>
+				<key>posttest</key>
 				<dict>
-					<key>description</key>
-					<string>Module 2</string>
-					<key>topic</key>
-					<string>This is a description of Module 2 content</string>
-					<key>pretest</key>
-					<dict>
-						<key>description</key>
-						<string>Pre-Test</string>
-						<key>loadFile</key>
-						<string>pretest_mod1.js</string>
-					</dict>
-					<key>posttest</key>
-					<dict>
-						<key>description</key>
-						<string>Post-Test</string>
-						<key>loadFile</key>
-						<string>posttest_mod1.js</string>
-					</dict>
-					<key>lessons</key>
-					<array>
-						<dict>
-							<key>description</key>
-							<string>Lesson 1</string>
-							<key>topic</key>
-							<string>Transportation</string>
-							<key>loadFile</key>
-							<string>lesson_1.js</string>
-						</dict>
-						<dict>
-							<key>description</key>
-							<string>Lesson 2</string>
-							<key>topic</key>
-							<string>Amusement Park</string>
-							<key>loadFile</key>
-							<string>lesson_2.js</string>
-						</dict>
-						<dict>
-							<key>description</key>
-							<string>Lesson 3</string>
-							<key>topic</key>
-							<string>School</string>
-							<key>loadFile</key>
-							<string>lesson_3.js</string>
-						</dict>
-					</array>
-				</dict>				
-			</array>
-		</dict>
-		<dict>
-			<key>description</key>
-			<string>Level 2</string>
-			<key>topic</key>
-			<string>This is a description of Level 2 content</string>
-			<key>modules</key>
-			<array>
-				<dict>
-					<key>description</key>
-					<string>Module 1</string>
-					<key>topic</key>
-					<string>This is a description of Module 1 content</string>
-					<key>pretest</key>
-					<dict>
-						<key>description</key>
-						<string>Pre-Test</string>
-						<key>loadFile</key>
-						<string>pretest_mod1.js</string>
-					</dict>
-					<key>posttest</key>
-					<dict>
-						<key>description</key>
-						<string>Post-Test</string>
-						<key>loadFile</key>
-						<string>posttest_mod1.js</string>
-					</dict>
-					<key>lessons</key>
-					<array>
-						<dict>
-							<key>description</key>
-							<string>Lesson 1</string>
-							<key>topic</key>
-							<string>Transportation</string>
-							<key>loadFile</key>
-							<string>lesson_1.js</string>
-						</dict>
-						<dict>
-							<key>description</key>
-							<string>Lesson 2</string>
-							<key>topic</key>
-							<string>Amusement Park</string>
-							<key>loadFile</key>
-							<string>lesson_2.js</string>
-						</dict>
-						<dict>
-							<key>description</key>
-							<string>Lesson 3</string>
-							<key>topic</key>
-							<string>School</string>
-							<key>loadFile</key>
-							<string>lesson_3.js</string>
-						</dict>
-					</array>
+					<key>lessonName</key>
+					<string>Post-Test</string>
+					<key>loadFile</key>
+					<string>posttest_mod1.js</string>
 				</dict>
+				<key>lessons</key>
+				<array>
+					<dict>
+						<key>lessonName</key>
+						<string>Lesson 1</string>
+						<key>topic</key>
+						<string>Transportation</string>
+						<key>loadFile</key>
+						<string>lesson_1.js</string>
+					</dict>
+					<dict>
+						<key>lessonName</key>
+						<string>Lesson 2</string>
+						<key>topic</key>
+						<string>Amusement Park</string>
+						<key>loadFile</key>
+						<string>lesson_2.js</string>
+					</dict>
+					<dict>
+						<key>lessonName</key>
+						<string>Lesson 3</string>
+						<key>topic</key>
+						<string>School</string>
+						<key>loadFile</key>
+						<string>lesson_3.js</string>
+					</dict>
+				</array>
+			</dict>
+			<dict>
+				<key>moduleName</key>
+				<string>Module 2</string>
+				<key>topic</key>
+				<string>This is a description of Module 2 content</string>
+				<key>pretest</key>
 				<dict>
-					<key>description</key>
-					<string>Module 2</string>
-					<key>topic</key>
-					<string>This is a description of Module 2 content</string>
-					<key>pretest</key>
+					<key>lessonName</key>
+					<string>Pre-Test</string>
+					<key>loadFile</key>
+					<string>pretest_mod1.js</string>
+				</dict>
+				<key>posttest</key>
+				<dict>
+					<key>lessonName</key>
+					<string>Post-Test</string>
+					<key>loadFile</key>
+					<string>posttest_mod1.js</string>
+				</dict>
+				<key>lessons</key>
+				<array>
 					<dict>
-						<key>description</key>
-						<string>Pre-Test</string>
+						<key>lessonName</key>
+						<string>Lesson 1</string>
+						<key>topic</key>
+						<string>Transportation</string>
 						<key>loadFile</key>
-						<string>pretest_mod1.js</string>
+						<string>lesson_1.js</string>
 					</dict>
-					<key>posttest</key>
 					<dict>
-						<key>description</key>
-						<string>Post-Test</string>
+						<key>lessonName</key>
+						<string>Lesson 2</string>
+						<key>topic</key>
+						<string>Amusement Park</string>
 						<key>loadFile</key>
-						<string>posttest_mod1.js</string>
+						<string>lesson_2.js</string>
 					</dict>
-					<key>lessons</key>
-					<array>
-						<dict>
-							<key>description</key>
-							<string>Lesson 1</string>
-							<key>topic</key>
-							<string>Transportation</string>
-							<key>loadFile</key>
-							<string>lesson_1.js</string>
-						</dict>
-						<dict>
-							<key>description</key>
-							<string>Lesson 2</string>
-							<key>topic</key>
-							<string>Amusement Park</string>
-							<key>loadFile</key>
-							<string>lesson_2.js</string>
-						</dict>
-						<dict>
-							<key>description</key>
-							<string>Lesson 3</string>
-							<key>topic</key>
-							<string>School</string>
-							<key>loadFile</key>
-							<string>lesson_3.js</string>
-						</dict>
-					</array>
-				</dict>				
-			</array>
-		</dict>		
-	</array>
-</dict>
+					<dict>
+						<key>lessonName</key>
+						<string>Lesson 3</string>
+						<key>topic</key>
+						<string>School</string>
+						<key>loadFile</key>
+						<string>lesson_3.js</string>
+					</dict>
+				</array>
+			</dict>	
+			<dict>
+				<key>moduleName</key>
+				<string>Module 3</string>
+				<key>topic</key>
+				<string>This is a description of Module 2 content</string>
+				<key>pretest</key>
+				<dict>
+					<key>lessonName</key>
+					<string>Pre-Test</string>
+					<key>loadFile</key>
+					<string>pretest_mod1.js</string>
+				</dict>
+				<key>posttest</key>
+				<dict>
+					<key>lessonName</key>
+					<string>Post-Test</string>
+					<key>loadFile</key>
+					<string>posttest_mod1.js</string>
+				</dict>
+				<key>lessons</key>
+				<array>
+					<dict>
+						<key>lessonName</key>
+						<string>Lesson 1</string>
+						<key>topic</key>
+						<string>Transportation</string>
+						<key>loadFile</key>
+						<string>lesson_1.js</string>
+					</dict>
+					<dict>
+						<key>lessonName</key>
+						<string>Lesson 2</string>
+						<key>topic</key>
+						<string>Amusement Park</string>
+						<key>loadFile</key>
+						<string>lesson_2.js</string>
+					</dict>
+					<dict>
+						<key>lessonName</key>
+						<string>Lesson 3</string>
+						<key>topic</key>
+						<string>School</string>
+						<key>loadFile</key>
+						<string>lesson_3.js</string>
+					</dict>
+				</array>
+			</dict>				
+						
+		</array>
+	</dict>
+	<dict>
+		<key>levelName</key>
+		<string>Level 2</string>
+		<key>topic</key>
+		<string>This is a description of Level 2 content</string>
+		<key>modules</key>
+		<array>
+			<dict>
+				<key>moduleName</key>
+				<string>Module 1</string>
+				<key>topic</key>
+				<string>This is a description of Module 1 content</string>
+				<key>pretest</key>
+				<dict>
+					<key>lessonName</key>
+					<string>Pre-Test</string>
+					<key>loadFile</key>
+					<string>pretest_mod1.js</string>
+				</dict>
+				<key>posttest</key>
+				<dict>
+					<key>lessonName</key>
+					<string>Post-Test</string>
+					<key>loadFile</key>
+					<string>posttest_mod1.js</string>
+				</dict>
+				<key>lessons</key>
+				<array>
+					<dict>
+						<key>lessonName</key>
+						<string>Lesson 1</string>
+						<key>topic</key>
+						<string>Transportation</string>
+						<key>loadFile</key>
+						<string>lesson_1.js</string>
+					</dict>
+					<dict>
+						<key>lessonName</key>
+						<string>Lesson 2</string>
+						<key>topic</key>
+						<string>Amusement Park</string>
+						<key>loadFile</key>
+						<string>lesson_2.js</string>
+					</dict>
+					<dict>
+						<key>lessonName</key>
+						<string>Lesson 3</string>
+						<key>topic</key>
+						<string>School</string>
+						<key>loadFile</key>
+						<string>lesson_3.js</string>
+					</dict>
+				</array>
+			</dict>
+			<dict>
+				<key>moduleName</key>
+				<string>Module 2</string>
+				<key>topic</key>
+				<string>This is a description of Module 2 content</string>
+				<key>pretest</key>
+				<dict>
+					<key>lessonName</key>
+					<string>Pre-Test</string>
+					<key>loadFile</key>
+					<string>pretest_mod1.js</string>
+				</dict>
+				<key>posttest</key>
+				<dict>
+					<key>lessonName</key>
+					<string>Post-Test</string>
+					<key>loadFile</key>
+					<string>posttest_mod1.js</string>
+				</dict>
+				<key>lessons</key>
+				<array>
+					<dict>
+						<key>lessonName</key>
+						<string>Lesson 1</string>
+						<key>topic</key>
+						<string>Transportation</string>
+						<key>loadFile</key>
+						<string>lesson_1.js</string>
+					</dict>
+					<dict>
+						<key>lessonName</key>
+						<string>Lesson 2</string>
+						<key>topic</key>
+						<string>Amusement Park</string>
+						<key>loadFile</key>
+						<string>lesson_2.js</string>
+					</dict>
+					<dict>
+						<key>lessonName</key>
+						<string>Lesson 3</string>
+						<key>topic</key>
+						<string>School</string>
+						<key>loadFile</key>
+						<string>lesson_3.js</string>
+					</dict>
+				</array>
+			</dict>				
+		</array>
+	</dict>		
+</array>
 </plist>

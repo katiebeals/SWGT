@@ -7,12 +7,36 @@
 //
 
 #import "ViewController.h"
+#import "Module.h"
+#import "Lesson.h"
+#import "SectionInfo.h"
+#import "QuoteCell.h"
+
+#pragma mark -
+#pragma mark ViewController
+
+
+// Private TableViewController properties and methods.
+@interface ViewController ()
+
+@property (nonatomic, strong) NSMutableArray* sectionInfoArray;
+@property (nonatomic, assign) NSInteger openSectionIndex;
+
+@end
+
+
+
+#define DEFAULT_ROW_HEIGHT 82
+#define HEADER_HEIGHT 45
+
 
 @implementation ViewController
 
 @synthesize theWebView = _theWebView;
 @synthesize theTableView = _theTableView;
-@synthesize dataModel = _dataModel;
+@synthesize modules = _modules;
+@synthesize rightOverlayView = _rightOverlayView, leftOverlayView = _leftOverlayView;
+@synthesize sectionInfoArray=_sectionInfoArray,openSectionIndex=openSectionIndex_, quoteCell=newsCell_;
 
 - (void)didReceiveMemoryWarning
 {
@@ -27,19 +51,23 @@
     // This is really means toggle menu
     
     CGRect newFrame;
+    CGRect newFrame2;
     
     if (menuVisible) {
-        newFrame = CGRectOffset(_theTableView.frame, -_theTableView.bounds.size.width, 0.0);
+        newFrame = CGRectOffset(_leftOverlayView.frame, -_leftOverlayView.bounds.size.width, 0.0);
+        newFrame2 = CGRectOffset(_rightOverlayView.frame, _rightOverlayView.bounds.size.width, 0.0);
+
         menuVisible = NO;
     } else {
-        newFrame = CGRectOffset(_theTableView.frame, _theTableView.bounds.size.width, 0.0);
+        newFrame = CGRectOffset(_leftOverlayView.frame, _leftOverlayView.bounds.size.width, 0.0);
+        newFrame2 = CGRectOffset(_rightOverlayView.frame, -_rightOverlayView.bounds.size.width, 0.0);
         menuVisible = YES;
     }
     
     
-    [UIView animateWithDuration:0.5 animations:^{
-        _theTableView.frame = newFrame;
-        
+    [UIView animateWithDuration:1.0 animations:^{
+        _leftOverlayView.frame = newFrame;
+        _rightOverlayView.frame = newFrame2;
     }];
     
     
@@ -47,11 +75,7 @@
 
 - (void)loadInstructionsVideo {
     
-    
-        
-        
     [self showMenu];
-        
     
     NSString *thePathURL = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"grammer/gt_instructions.html"];
     
@@ -103,11 +127,10 @@
      NSString *path = [[NSBundle mainBundle] pathForResource:@"initDataModel" ofType:@"js"];
      
      NSString *javascriptString = [NSString stringWithContentsOfFile:path encoding:NSASCIIStringEncoding error:nil];
-     
-     
+    
      // We need to perform selector with afterDelay 0 in order to avoid weird recursion stop
      // when calling NativeBridge in a recursion more then 200 times :s (fails ont 201th calls!!!)
-     [self performSelector:@selector(returnResultAfterDelay:) withObject:javascriptString afterDelay:0.5];
+     [self performSelector:@selector(returnResultAfterDelay:) withObject:javascriptString afterDelay:2.5];
      
      
 }
@@ -125,7 +148,9 @@
     
     NSError *error = nil;
     
-    [fileMgr copyItemAtPath:grammerDir toPath:docsDir error:&error];
+    BOOL didCopy = [fileMgr copyItemAtPath:grammerDir toPath:docsDir error:&error];
+    
+    NSLog(@"%d: Check For Errors: %@",didCopy, error);
     
 }
 
@@ -136,27 +161,64 @@
     
     menuVisible = YES;
     
+    // Set up default values.
+    self.theTableView.sectionHeaderHeight = HEADER_HEIGHT;
+
+    /*
+     The section info array is thrown away in viewWillUnload, so it's OK to set the default values here. If you keep the section information etc. then set the default values in the designated initializer.
+     */
+
+    openSectionIndex_ = NSNotFound;
+
+    
     [self copyWebSiteFromBundle];
     
     // Instanciate JSON parser library
     json = [ SBJSON new ];
 
     
-    _dataModel = [[NSArray alloc] initWithObjects:@"Instructions", @"Lesson 1",@"Lesson 2", nil];
+
 }
-
-
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+
+    
+    // To reduce memory pressure, reset the section info array if the view is unloaded.
+	self.sectionInfoArray = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    /*
+     Check whether the section info array has been created, and if so whether the section count still matches the current section count. In general, you need to keep the section info synchronized with the rows and section. If you support editing in the table view, you need to appropriately update the section info during editing operations.
+     */
+	if ((self.sectionInfoArray == nil) || ([self.sectionInfoArray count] != [self numberOfSectionsInTableView:self.theTableView])) {
+		
+        // For each module, set up a corresponding SectionInfo object to contain the default height for each row.
+		NSMutableArray *infoArray = [[NSMutableArray alloc] init];
+		
+		for (Module *module in self.modules) {
+			
+			SectionInfo *sectionInfo = [[SectionInfo alloc] init];			
+			sectionInfo.module = module;
+			sectionInfo.open = NO;
+			
+            NSNumber *defaultRowHeight = [NSNumber numberWithInteger:DEFAULT_ROW_HEIGHT];
+			NSInteger countOfLessons = [[sectionInfo.module lessons] count];
+			for (NSInteger i = 0; i < countOfLessons; i++) {
+				[sectionInfo insertObject:defaultRowHeight inRowHeightsAtIndex:i];
+			}
+			
+			[infoArray addObject:sectionInfo];
+		}
+		
+		self.sectionInfoArray = infoArray;
+	}
+
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -184,108 +246,176 @@
     }
 }
 
-#pragma mark - Table view data source
+#pragma mark Table view data source and delegate
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-
-    // Return the number of sections.
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-
-    // Return the number of rows in the section.
-    return [_dataModel count];
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *CellIdentifier = @"Cell";
+-(NSInteger)numberOfSectionsInTableView:(UITableView*)tableView {
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    return [self.modules count];
+}
+
+
+-(NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section {
+    
+    NSLog(@"SectionInfoArray: %@", self.sectionInfoArray);
+    
+	SectionInfo *sectionInfo = [self.sectionInfoArray objectAtIndex:section];
+	NSInteger numStoriesInSection = [[sectionInfo.module lessons] count];
+	
+    return sectionInfo.open ? numStoriesInSection : 0;
+}
+
+
+-(UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath {
+    
+    static NSString *QuoteCellIdentifier = @"QuoteCellIdentifier";
+    
+    QuoteCell *cell = (QuoteCell*)[tableView dequeueReusableCellWithIdentifier:QuoteCellIdentifier];
+    
+    if (!cell) {
+        
+        UINib *quoteCellNib = [UINib nibWithNibName:@"QuoteCell" bundle:nil];
+        [quoteCellNib instantiateWithOwner:self options:nil];
+        cell = self.quoteCell;
+        self.quoteCell = nil;
+        
+
     }
     
-    // Configure the cell...
-    cell.textLabel.text = [_dataModel objectAtIndex:indexPath.row];
+    Module *module = (Module *)[[self.sectionInfoArray objectAtIndex:indexPath.section] module];
+    cell.lesson = [module.lessons objectAtIndex:indexPath.row];
     
     return cell;
 }
 
-/*
- // Override to support conditional editing of the table view.
- - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
- {
- // Return NO if you do not want the specified item to be editable.
- return YES;
- }
- */
 
-/*
- // Override to support editing the table view.
- - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
- {
- if (editingStyle == UITableViewCellEditingStyleDelete) {
- // Delete the row from the data source
- [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
- }   
- else if (editingStyle == UITableViewCellEditingStyleInsert) {
- // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
- }   
- }
- */
+-(UIView*)tableView:(UITableView*)tableView viewForHeaderInSection:(NSInteger)section {
+    
+    /*
+     Create the section header views lazily.
+     */
+	SectionInfo *sectionInfo = [self.sectionInfoArray objectAtIndex:section];
+    if (!sectionInfo.headerView) {
+		NSString *moduleName = sectionInfo.module.name;
+        sectionInfo.headerView = [[SectionHeaderView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.theTableView.bounds.size.width, HEADER_HEIGHT) title:moduleName section:section delegate:self];
+    }
+    
+    return sectionInfo.headerView;
+}
 
-/*
- // Override to support rearranging the table view.
- - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
- {
- }
- */
 
-/*
- // Override to support conditional rearranging of the table view.
- - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
- {
- // Return NO if you do not want the item to be re-orderable.
- return YES;
- }
- */
+-(CGFloat)tableView:(UITableView*)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath {
+    
+	SectionInfo *sectionInfo = [self.sectionInfoArray objectAtIndex:indexPath.section];
+    return [[sectionInfo objectInRowHeightsAtIndex:indexPath.row] floatValue];
+    // Alternatively, return rowHeight.
+}
 
-#pragma mark - Table view delegate
+
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
 
+    
     switch (indexPath.row) {
         case 0: {
             [self loadInstructionsVideo];
             break;
         }
         case 1: {
-
+            
             [self loadLesson:indexPath.row];
             break;
         }            
             
         default: {
-
+            
             [self loadLesson:indexPath.row];
             break;
         }
     }
     
-
+    [tableView deselectRowAtIndexPath:indexPath animated:YES]; 
+    
+    
 }
+
+#pragma mark Section header delegate
+
+-(void)sectionHeaderView:(SectionHeaderView*)sectionHeaderView sectionOpened:(NSInteger)sectionOpened {
+	
+	SectionInfo *sectionInfo = [self.sectionInfoArray objectAtIndex:sectionOpened];
+	
+	sectionInfo.open = YES;
+    
+    /*
+     Create an array containing the index paths of the rows to insert: These correspond to the rows for each lesson in the current section.
+     */
+    NSInteger countOfRowsToInsert = [sectionInfo.module.lessons count];
+    NSMutableArray *indexPathsToInsert = [[NSMutableArray alloc] init];
+    for (NSInteger i = 0; i < countOfRowsToInsert; i++) {
+        [indexPathsToInsert addObject:[NSIndexPath indexPathForRow:i inSection:sectionOpened]];
+    }
+    
+    /*
+     Create an array containing the index paths of the rows to delete: These correspond to the rows for each lesson in the previously-open section, if there was one.
+     */
+    NSMutableArray *indexPathsToDelete = [[NSMutableArray alloc] init];
+    
+    NSInteger previousOpenSectionIndex = self.openSectionIndex;
+    if (previousOpenSectionIndex != NSNotFound) {
+		
+		SectionInfo *previousOpenSection = [self.sectionInfoArray objectAtIndex:previousOpenSectionIndex];
+        previousOpenSection.open = NO;
+        [previousOpenSection.headerView toggleOpenWithUserAction:NO];
+        NSInteger countOfRowsToDelete = [previousOpenSection.module.lessons count];
+        for (NSInteger i = 0; i < countOfRowsToDelete; i++) {
+            [indexPathsToDelete addObject:[NSIndexPath indexPathForRow:i inSection:previousOpenSectionIndex]];
+        }
+    }
+    
+    // Style the animation so that there's a smooth flow in either direction.
+    UITableViewRowAnimation insertAnimation;
+    UITableViewRowAnimation deleteAnimation;
+    if (previousOpenSectionIndex == NSNotFound || sectionOpened < previousOpenSectionIndex) {
+        insertAnimation = UITableViewRowAnimationTop;
+        deleteAnimation = UITableViewRowAnimationBottom;
+    }
+    else {
+        insertAnimation = UITableViewRowAnimationBottom;
+        deleteAnimation = UITableViewRowAnimationTop;
+    }
+    
+    // Apply the updates.
+    [self.theTableView beginUpdates];
+    [self.theTableView insertRowsAtIndexPaths:indexPathsToInsert withRowAnimation:insertAnimation];
+    [self.theTableView deleteRowsAtIndexPaths:indexPathsToDelete withRowAnimation:deleteAnimation];
+    [self.theTableView endUpdates];
+    self.openSectionIndex = sectionOpened;
+    
+}
+
+
+-(void)sectionHeaderView:(SectionHeaderView*)sectionHeaderView sectionClosed:(NSInteger)sectionClosed {
+    
+    /*
+     Create an array of the index paths of the rows in the section that was closed, then delete those rows from the table view.
+     */
+	SectionInfo *sectionInfo = [self.sectionInfoArray objectAtIndex:sectionClosed];
+	
+    sectionInfo.open = NO;
+    NSInteger countOfRowsToDelete = [self.theTableView numberOfRowsInSection:sectionClosed];
+    
+    if (countOfRowsToDelete > 0) {
+        NSMutableArray *indexPathsToDelete = [[NSMutableArray alloc] init];
+        for (NSInteger i = 0; i < countOfRowsToDelete; i++) {
+            [indexPathsToDelete addObject:[NSIndexPath indexPathForRow:i inSection:sectionClosed]];
+        }
+        [self.theTableView deleteRowsAtIndexPaths:indexPathsToDelete withRowAnimation:UITableViewRowAnimationTop];
+    }
+    self.openSectionIndex = NSNotFound;
+}
+
+
 
 
 

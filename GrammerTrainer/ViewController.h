@@ -16,10 +16,12 @@
     
     SBJSON *json;
     BOOL menuVisible;
+    BOOL iconsVisible;
 
 }
 
-@property (strong, nonatomic) NSArray *modules;
+@property (strong, nonatomic) NSArray *levels;
+
 @property (nonatomic, weak) IBOutlet QuoteCell *quoteCell;
 
 
@@ -28,6 +30,7 @@
 @property (strong, nonatomic) IBOutlet UIView *rightOverlayView;
 
 @property (strong, nonatomic) IBOutlet UIView *leftOverlayView;
+
 
 
 @end

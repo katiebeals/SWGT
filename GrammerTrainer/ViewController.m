@@ -7,20 +7,34 @@
 //
 
 #import "ViewController.h"
+#import "Level.h"
 #import "Module.h"
 #import "Lesson.h"
 #import "SectionInfo.h"
 #import "QuoteCell.h"
+#import "ResultsTableViewCell.h"
+
+#import <QuartzCore/QuartzCore.h>
 
 #pragma mark -
 #pragma mark ViewController
 
 
 // Private TableViewController properties and methods.
-@interface ViewController ()
+@interface ViewController () 
+
+@property (nonatomic, assign) IBOutlet ResultsTableViewCell *tmpCell;
 
 @property (nonatomic, strong) NSMutableArray* sectionInfoArray;
 @property (nonatomic, assign) NSInteger openSectionIndex;
+@property (strong, nonatomic) IBOutlet UIScrollView *iconScrollView;
+@property (strong, nonatomic) IBOutlet UIView *iconView;
+@property (strong, nonatomic) IBOutlet UILabel *levelLabel;
+
+@property (strong, nonatomic) NSArray *modules;
+
+- (IBAction)backButtonPushed:(id)sender;
+
 
 @end
 
@@ -34,9 +48,11 @@
 
 @synthesize theWebView = _theWebView;
 @synthesize theTableView = _theTableView;
-@synthesize modules = _modules;
-@synthesize rightOverlayView = _rightOverlayView, leftOverlayView = _leftOverlayView;
+@synthesize levels = _levels, modules = modules_;
+@synthesize rightOverlayView = _rightOverlayView, leftOverlayView = _leftOverlayView, levelLabel = levelLabel_;
 @synthesize sectionInfoArray=_sectionInfoArray,openSectionIndex=openSectionIndex_, quoteCell=newsCell_;
+@synthesize iconScrollView = iconScrollView_, iconView=iconView_;
+@synthesize tmpCell = tmpCell_;
 
 - (void)didReceiveMemoryWarning
 {
@@ -64,12 +80,10 @@
         menuVisible = YES;
     }
     
-    
     [UIView animateWithDuration:1.0 animations:^{
         _leftOverlayView.frame = newFrame;
         _rightOverlayView.frame = newFrame2;
     }];
-    
     
 }
 
@@ -85,9 +99,7 @@
 
 }
 
-
-
-- (void)copyOverLesson:(int)lesson {
+- (void)copyOverLesson:(NSString *)lessonFileName {
     
     
     NSFileManager *fileMgr = [NSFileManager defaultManager];
@@ -95,11 +107,10 @@
     // Remote dataModel.js  from ./grammer directory
     // Copy lesson_x.js to ./grammer/dataModel.js
     
-
-    NSString *lessonFile = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"lesson_%d", lesson] ofType:@"js"];
+    NSString *lessonFile = [[NSBundle mainBundle] pathForResource:[lessonFileName stringByDeletingPathExtension] ofType:@"js"];
 
     NSString *grammerDir = [NSHomeDirectory() stringByAppendingPathComponent:  @"Documents/grammer"];
-    NSString *dest = [grammerDir stringByAppendingPathComponent:[NSString stringWithFormat:@"datamodel.js", lesson]];
+    NSString *dest = [grammerDir stringByAppendingPathComponent:@"datamodel.js"];
 
     [fileMgr removeItemAtPath:dest error:nil];
     
@@ -109,31 +120,158 @@
     
 }
 
-- (void)loadLesson:(NSInteger)lessonNumber {
+- (void)loadLesson:(NSString *)lessonFileName {
     
     
-    [self showMenu]; // toggle menu
+    NSString *lessonFile = [[NSBundle mainBundle] pathForResource:[lessonFileName stringByDeletingPathExtension] ofType:@"js"];
+
+    if (lessonFile) {
+        
+        [self showMenu]; // toggle menu
+        
+        NSString *thePathURL = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"grammer/gt_main.html"];
+        
+        NSURLRequest *theRequest = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:thePathURL]];
+        
+        [_theWebView loadRequest:theRequest];
+        
+        [self copyOverLesson:lessonFileName];
+        
+        // Reinitialize data model
+        
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"initDataModel" ofType:@"js"];
+        
+        NSString *javascriptString = [NSString stringWithContentsOfFile:path encoding:NSASCIIStringEncoding error:nil];
+        
+        // We need to perform selector with afterDelay 0 in order to avoid weird recursion stop
+        // when calling NativeBridge in a recursion more then 200 times :s (fails ont 201th calls!!!)
+        [self performSelector:@selector(returnResultAfterDelay:) withObject:javascriptString afterDelay:2.5];
+
+    } else {
+        
+        // open a alert with an OK and cancel button
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"File Not Found" message:@"The referenced javascript file was not found."
+                                                       delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+        [alert show];
+
+    }
     
-    NSString *thePathURL = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"grammer/gt_main.html"];
     
-    NSURLRequest *theRequest = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:thePathURL]];
-    
-    [_theWebView loadRequest:theRequest];
-    
-    [self copyOverLesson:lessonNumber];
-     
-     // Reinitialize data model
-    
-     NSString *path = [[NSBundle mainBundle] pathForResource:@"initDataModel" ofType:@"js"];
-     
-     NSString *javascriptString = [NSString stringWithContentsOfFile:path encoding:NSASCIIStringEncoding error:nil];
-    
-     // We need to perform selector with afterDelay 0 in order to avoid weird recursion stop
-     // when calling NativeBridge in a recursion more then 200 times :s (fails ont 201th calls!!!)
-     [self performSelector:@selector(returnResultAfterDelay:) withObject:javascriptString afterDelay:2.5];
      
      
 }
+
+- (IBAction)backButtonPushed:(id)sender {
+    
+    //CGRect newFrame = CGRectOffset(iconView_.frame, iconView_.bounds.size.width, 0.0);
+    iconsVisible = YES;
+    
+    [UIView animateWithDuration:1.0 animations:^{
+        iconView_.alpha = 1.0;
+    }];
+
+
+}
+
+
+- (void)buttonPushed:(id)sender {
+    
+    UIButton *theButton = (UIButton *)sender;
+    
+    NSLog(@"The button is: %d", theButton.tag);
+    
+    Level *theLevel = [_levels objectAtIndex:theButton.tag];
+    
+    self.modules = [theLevel modules];
+    
+    [_theTableView reloadData];
+    
+    levelLabel_.text = theLevel.levelName;
+    
+    //CGRect newFrame = CGRectOffset(iconView_.frame, -iconView_.bounds.size.width, 0.0);
+    iconsVisible = NO;
+    
+
+    [UIView animateWithDuration:1.0 animations:^{
+            iconView_.alpha = 0.0;
+        }];
+
+    
+}
+
+- (void)layoutIcons: (NSArray *)levelsArray {
+	
+		
+	// reset iconScrollView
+	for (UIView *view in [iconScrollView_ subviews])
+	{
+		[view removeFromSuperview];
+	}
+	
+	
+	NSUInteger xIndex = 0;
+	NSUInteger yIndex = 0;
+	NSUInteger vSpacing = 58;
+	NSUInteger hSpacing = 100;
+	NSUInteger index = 0;
+	
+	NSUInteger xOffset = 58;
+	NSUInteger yOffset = 56;
+	
+	NSUInteger pageIndex = 0;
+	
+	Level *theLevel;
+	
+	for (theLevel in levelsArray) {
+		
+		pageIndex = index / 9; // Nine icons per page
+		xIndex = index % 3 + pageIndex * 3;
+		yIndex = index / 3 - pageIndex * 3;    // Note this is interger arthimetic
+		
+		//DLog(@"Index: %d xIndex: %d yIndex: %d pageIndex: %d", index, xIndex, yIndex, pageIndex);
+		
+		UIButton *newButton = [UIButton buttonWithType:UIButtonTypeCustom];
+		newButton.tag = index;
+		
+		[newButton addTarget:self action:@selector(buttonPushed:) forControlEvents:UIControlEventTouchUpInside];
+		newButton.bounds = CGRectMake(0, 0, hSpacing, vSpacing);
+		newButton.center = CGPointMake(xOffset+(pageIndex*10.0) + xIndex*hSpacing, yOffset + yIndex*vSpacing);
+		
+        
+		//UIImage *iconImage = [iconImageDict objectForKey:[menuItemDict objectForKey:@"iconFileName"]];
+
+        [newButton setImage:[UIImage imageNamed:@"levelIcon.png"] forState:UIControlStateNormal];		
+        
+		//DLog(@"frame: %f %f %f %f", newButton.frame.origin.x, newButton.frame.origin.y,newButton.frame.size.width, newButton.frame.size.height);
+		
+		[self.iconScrollView addSubview:newButton];
+		
+		UILabel *buttonLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+		buttonLabel.text = theLevel.levelName;
+		
+		buttonLabel.frame = CGRectMake(0.0, 0.0, 100.0, 30.0);
+        
+		buttonLabel.textAlignment = UITextAlignmentCenter;
+		buttonLabel.center = CGPointMake(xOffset+(pageIndex*10.0) + xIndex*hSpacing, yOffset + yIndex*vSpacing + 40.0);
+		buttonLabel.backgroundColor = [UIColor clearColor];
+		buttonLabel.textColor = [UIColor whiteColor];
+		
+		
+		[self.iconScrollView addSubview:buttonLabel];
+		
+		index++;
+	}
+	
+	// set the content size so it can be scrollable
+	CGFloat pageCount = ceilf([levelsArray count] / 9.0f);
+	[iconScrollView_ setContentSize:CGSizeMake(pageCount*320.0, iconScrollView_.frame.size.height)];
+	
+	//iconScrollPageControl.numberOfPages = pageCount;
+	//iconScrollPageControl.currentPage = 0;
+	//[iconScrollPageControl updateCurrentPageDisplay];
+	
+}
+
 
 
 #pragma mark - View lifecycle
@@ -160,6 +298,7 @@
 	// Do any additional setup after loading the view, typically from a nib.
     
     menuVisible = YES;
+    iconsVisible = YES;
     
     // Set up default values.
     self.theTableView.sectionHeaderHeight = HEADER_HEIGHT;
@@ -169,6 +308,8 @@
      */
 
     openSectionIndex_ = NSNotFound;
+    
+    [self layoutIcons:self.levels];
 
     
     [self copyWebSiteFromBundle];
@@ -193,32 +334,8 @@
 {
     [super viewWillAppear:animated];
     
-    /*
-     Check whether the section info array has been created, and if so whether the section count still matches the current section count. In general, you need to keep the section info synchronized with the rows and section. If you support editing in the table view, you need to appropriately update the section info during editing operations.
-     */
-	if ((self.sectionInfoArray == nil) || ([self.sectionInfoArray count] != [self numberOfSectionsInTableView:self.theTableView])) {
-		
-        // For each module, set up a corresponding SectionInfo object to contain the default height for each row.
-		NSMutableArray *infoArray = [[NSMutableArray alloc] init];
-		
-		for (Module *module in self.modules) {
-			
-			SectionInfo *sectionInfo = [[SectionInfo alloc] init];			
-			sectionInfo.module = module;
-			sectionInfo.open = NO;
-			
-            NSNumber *defaultRowHeight = [NSNumber numberWithInteger:DEFAULT_ROW_HEIGHT];
-			NSInteger countOfLessons = [[sectionInfo.module lessons] count];
-			for (NSInteger i = 0; i < countOfLessons; i++) {
-				[sectionInfo insertObject:defaultRowHeight inRowHeightsAtIndex:i];
-			}
-			
-			[infoArray addObject:sectionInfo];
-		}
-		
-		self.sectionInfoArray = infoArray;
-	}
 
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -250,58 +367,92 @@
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView*)tableView {
     
-    return [self.modules count];
+    return [modules_ count];
 }
 
 
 -(NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section {
     
-    NSLog(@"SectionInfoArray: %@", self.sectionInfoArray);
-    
-	SectionInfo *sectionInfo = [self.sectionInfoArray objectAtIndex:section];
-	NSInteger numStoriesInSection = [[sectionInfo.module lessons] count];
 	
-    return sectionInfo.open ? numStoriesInSection : 0;
+    Module *theModule = (Module *)[modules_ objectAtIndex:section];
+    
+    return [theModule.lessons count];
 }
 
-
--(UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     
-    static NSString *QuoteCellIdentifier = @"QuoteCellIdentifier";
+    /*
+    static NSString *CellIdentifier = @"Cell";
     
-    QuoteCell *cell = (QuoteCell*)[tableView dequeueReusableCellWithIdentifier:QuoteCellIdentifier];
-    
-    if (!cell) {
-        
-        UINib *quoteCellNib = [UINib nibWithNibName:@"QuoteCell" bundle:nil];
-        [quoteCellNib instantiateWithOwner:self options:nil];
-        cell = self.quoteCell;
-        self.quoteCell = nil;
-        
-
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
     }
+    */
     
-    Module *module = (Module *)[[self.sectionInfoArray objectAtIndex:indexPath.section] module];
-    cell.lesson = [module.lessons objectAtIndex:indexPath.row];
+    static NSString *ResultsCellIdentifier = @"ResultsTableViewCell";
+	
+	ResultsTableViewCell *cell = (ResultsTableViewCell *)[tableView dequeueReusableCellWithIdentifier:ResultsCellIdentifier];
+	if (cell == nil) {		
+		[[NSBundle mainBundle] loadNibNamed:@"ResultsTableCell" owner:self options:nil];
+        cell = tmpCell_;
+        self.tmpCell = nil;
+		//cell.backgroundView = [[UACellBackgroundView alloc] initWithFrame:CGRectZero];
+        cell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"paperPattern.png"]];
+	}
+
+    cell.contentView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"paperPattern.png"]];
+    // Configure the cell...
+    
+    Module *theModule = (Module *)[modules_ objectAtIndex:indexPath.section];
+
+    Lesson *theLesson = (Lesson *)[theModule.lessons objectAtIndex:indexPath.row];
+
+    //cell.textLabel.text = [theLesson lessonName];
+    //cell.detailTextLabel.text = [theLesson topic];
+    
+    
+	cell.scoreLabel.text = [theLesson topic];
+	//cell.descriptionOne.text = [dictItem objectForKey:@"Metric"];
+	cell.descriptionTwo.text = [theLesson lessonName];
+	
+	//[cell setPosition:UACellBackgroundViewPositionMiddle];
+	[cell setColor:UACellBackgroundLightGray];
+	
+	[cell setPosition:UACellBackgroundViewPositionMiddle];
+
     
     return cell;
 }
 
 
+
 -(UIView*)tableView:(UITableView*)tableView viewForHeaderInSection:(NSInteger)section {
     
-    /*
-     Create the section header views lazily.
-     */
-	SectionInfo *sectionInfo = [self.sectionInfoArray objectAtIndex:section];
-    if (!sectionInfo.headerView) {
-		NSString *moduleName = sectionInfo.module.name;
-        sectionInfo.headerView = [[SectionHeaderView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.theTableView.bounds.size.width, HEADER_HEIGHT) title:moduleName section:section delegate:self];
-    }
+
+    Module *theModule = (Module *)[modules_ objectAtIndex:section];
+
+    CGRect titleLabelFrame = CGRectMake(0.0, 0.0, 320.0, 40.0);
     
-    return sectionInfo.headerView;
+    UIView *sectionView = [[UIView alloc] initWithFrame:titleLabelFrame];
+    sectionView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"paperPattern.png"]];
+    
+    //sectionView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+    //sectionView.layer.borderWidth = 1.0;
+    
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectInset(titleLabelFrame, 10.0, 0)];
+    label.text = theModule.name;
+    label.font = [UIFont boldSystemFontOfSize:17.0];
+    label.textColor = [UIColor blueColor];
+    label.backgroundColor = [UIColor clearColor];
+    
+    [sectionView addSubview:label];
+    
+    return sectionView;
 }
 
+/*
 
 -(CGFloat)tableView:(UITableView*)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath {
     
@@ -310,12 +461,19 @@
     // Alternatively, return rowHeight.
 }
 
+ */
+
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 
+
+    Module *theModule = (Module *)[modules_ objectAtIndex:indexPath.section];
     
+    Lesson *theLesson = (Lesson *)[theModule.lessons objectAtIndex:indexPath.row];
+
+            
     switch (indexPath.row) {
         case 0: {
             [self loadInstructionsVideo];
@@ -323,100 +481,22 @@
         }
         case 1: {
             
-            [self loadLesson:indexPath.row];
+            [self loadLesson:theLesson.loadFile];
             break;
         }            
             
         default: {
             
-            [self loadLesson:indexPath.row];
+            [self loadLesson:theLesson.loadFile];
             break;
         }
     }
-    
+
+
     [tableView deselectRowAtIndexPath:indexPath animated:YES]; 
     
     
 }
-
-#pragma mark Section header delegate
-
--(void)sectionHeaderView:(SectionHeaderView*)sectionHeaderView sectionOpened:(NSInteger)sectionOpened {
-	
-	SectionInfo *sectionInfo = [self.sectionInfoArray objectAtIndex:sectionOpened];
-	
-	sectionInfo.open = YES;
-    
-    /*
-     Create an array containing the index paths of the rows to insert: These correspond to the rows for each lesson in the current section.
-     */
-    NSInteger countOfRowsToInsert = [sectionInfo.module.lessons count];
-    NSMutableArray *indexPathsToInsert = [[NSMutableArray alloc] init];
-    for (NSInteger i = 0; i < countOfRowsToInsert; i++) {
-        [indexPathsToInsert addObject:[NSIndexPath indexPathForRow:i inSection:sectionOpened]];
-    }
-    
-    /*
-     Create an array containing the index paths of the rows to delete: These correspond to the rows for each lesson in the previously-open section, if there was one.
-     */
-    NSMutableArray *indexPathsToDelete = [[NSMutableArray alloc] init];
-    
-    NSInteger previousOpenSectionIndex = self.openSectionIndex;
-    if (previousOpenSectionIndex != NSNotFound) {
-		
-		SectionInfo *previousOpenSection = [self.sectionInfoArray objectAtIndex:previousOpenSectionIndex];
-        previousOpenSection.open = NO;
-        [previousOpenSection.headerView toggleOpenWithUserAction:NO];
-        NSInteger countOfRowsToDelete = [previousOpenSection.module.lessons count];
-        for (NSInteger i = 0; i < countOfRowsToDelete; i++) {
-            [indexPathsToDelete addObject:[NSIndexPath indexPathForRow:i inSection:previousOpenSectionIndex]];
-        }
-    }
-    
-    // Style the animation so that there's a smooth flow in either direction.
-    UITableViewRowAnimation insertAnimation;
-    UITableViewRowAnimation deleteAnimation;
-    if (previousOpenSectionIndex == NSNotFound || sectionOpened < previousOpenSectionIndex) {
-        insertAnimation = UITableViewRowAnimationTop;
-        deleteAnimation = UITableViewRowAnimationBottom;
-    }
-    else {
-        insertAnimation = UITableViewRowAnimationBottom;
-        deleteAnimation = UITableViewRowAnimationTop;
-    }
-    
-    // Apply the updates.
-    [self.theTableView beginUpdates];
-    [self.theTableView insertRowsAtIndexPaths:indexPathsToInsert withRowAnimation:insertAnimation];
-    [self.theTableView deleteRowsAtIndexPaths:indexPathsToDelete withRowAnimation:deleteAnimation];
-    [self.theTableView endUpdates];
-    self.openSectionIndex = sectionOpened;
-    
-}
-
-
--(void)sectionHeaderView:(SectionHeaderView*)sectionHeaderView sectionClosed:(NSInteger)sectionClosed {
-    
-    /*
-     Create an array of the index paths of the rows in the section that was closed, then delete those rows from the table view.
-     */
-	SectionInfo *sectionInfo = [self.sectionInfoArray objectAtIndex:sectionClosed];
-	
-    sectionInfo.open = NO;
-    NSInteger countOfRowsToDelete = [self.theTableView numberOfRowsInSection:sectionClosed];
-    
-    if (countOfRowsToDelete > 0) {
-        NSMutableArray *indexPathsToDelete = [[NSMutableArray alloc] init];
-        for (NSInteger i = 0; i < countOfRowsToDelete; i++) {
-            [indexPathsToDelete addObject:[NSIndexPath indexPathForRow:i inSection:sectionClosed]];
-        }
-        [self.theTableView deleteRowsAtIndexPaths:indexPathsToDelete withRowAnimation:UITableViewRowAnimationTop];
-    }
-    self.openSectionIndex = NSNotFound;
-}
-
-
-
 
 
 #pragma Native Web Interface

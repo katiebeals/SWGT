@@ -9,19 +9,20 @@
 #import "AppDelegate.h"
 
 #import "ViewController.h"
+#import "Level.h"
 #import "Module.h"
 #import "Lesson.h"
 
 @interface AppDelegate ()
 
-@property (nonatomic, strong) NSArray *modules;
-- (void)setUpModulesArray;
+@property (nonatomic, strong) NSArray *levels;
+- (void)readInDataModel;
 
 @end
 
 @implementation AppDelegate
 
-@synthesize window = _window, modules=modules_;
+@synthesize window = _window, levels=levels_;
 @synthesize viewController = _viewController;
 
 
@@ -36,11 +37,11 @@
     }
     
     /*
-     Get the plays and quotations data from the plist, then pass the array on to the table view controller.
+     Get the levels,modules, and lessons data from the plist, then pass the array on to the table view controller.
      */
-    [self setUpModulesArray];
+    [self readInDataModel];
     
-    self.viewController.modules = self.modules;
+    self.viewController.levels = self.levels;
 
     
     self.window.rootViewController = self.viewController;
@@ -48,43 +49,56 @@
     return YES;
 }
 
-- (void)setUpModulesArray {
+- (void)readInDataModel {
     
     NSURL *url = [[NSBundle mainBundle] URLForResource:@"grammerManifest" withExtension:@"plist"];
     
-    NSArray *levelsDictionariesArray = [[NSArray alloc ] initWithContentsOfURL:url];
+    NSArray *levelDictionaries = [[NSArray alloc ] initWithContentsOfURL:url];
 
-    // For now were just looking at the first level
-    NSDictionary *moduleDictionary = [levelsDictionariesArray objectAtIndex:0];
-
-    NSArray *moduleDictionariesArray = [moduleDictionary objectForKey:@"modules"];
-
-    // This will hold the Module objects we create in the loop
-    NSMutableArray *modulesArray = [NSMutableArray arrayWithCapacity:[moduleDictionariesArray count]];
+    // This will hold the Level objects we create in the loop
+    NSMutableArray *levelsArray = [NSMutableArray arrayWithCapacity:[levelDictionaries count]];
     
-    for (NSDictionary *moduleDictionary in moduleDictionariesArray) {
+    for (NSDictionary *levelDictionary in levelDictionaries) {
         
-        Module *module = [[Module alloc] init];
-        module.name = [moduleDictionary objectForKey:@"moduleName"];
+        Level *level = [[Level alloc] init];
+        [level setValuesForKeysWithDictionary:levelDictionary];
+
+        NSArray *moduleDictionariesArray = [levelDictionary objectForKey:@"modules"];
+
+        // This will hold the Module objects we create in the loop
+        NSMutableArray *modulesArray = [NSMutableArray arrayWithCapacity:[moduleDictionariesArray count]];
         
-        NSArray *lessonDictionaries = [moduleDictionary objectForKey:@"lessons"];
-        
-        // This will hold the Lesson objects we create in the loop
-        NSMutableArray *lessons = [NSMutableArray arrayWithCapacity:[lessonDictionaries count]];
-        
-        for (NSDictionary *lessonDictionary in lessonDictionaries) {
+        for (NSDictionary *moduleDictionary in moduleDictionariesArray) {
             
-            Lesson *lesson = [[Lesson alloc] init];
-            [lesson setValuesForKeysWithDictionary:lessonDictionary];
+            Module *module = [[Module alloc] init];
+            module.name = [moduleDictionary objectForKey:@"moduleName"];
             
-            [lessons addObject:lesson];
+            NSArray *lessonDictionaries = [moduleDictionary objectForKey:@"lessons"];
+            
+            // This will hold the Lesson objects we create in the loop
+            NSMutableArray *lessons = [NSMutableArray arrayWithCapacity:[lessonDictionaries count]];
+            
+            for (NSDictionary *lessonDictionary in lessonDictionaries) {
+                
+                Lesson *lesson = [[Lesson alloc] init];
+                [lesson setValuesForKeysWithDictionary:lessonDictionary];
+                
+                [lessons addObject:lesson];
+            }
+            module.lessons = lessons;
+            
+            [modulesArray addObject:module];
         }
-        module.lessons = lessons;
         
-        [modulesArray addObject:module];
+        level.modules = modulesArray;
+                
+        [levelsArray addObject:level];
     }
     
-    self.modules = modulesArray;
+    self.levels = levelsArray;
+
+    
+        
 }
 
 

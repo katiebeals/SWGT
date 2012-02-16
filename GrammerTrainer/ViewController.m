@@ -30,6 +30,7 @@
 @property (strong, nonatomic) IBOutlet UIScrollView *iconScrollView;
 @property (strong, nonatomic) IBOutlet UIView *iconView;
 @property (strong, nonatomic) IBOutlet UILabel *levelLabel;
+@property (strong, nonatomic) IBOutlet UILabel *signLabel;
 
 @property (strong, nonatomic) NSArray *modules;
 
@@ -49,7 +50,7 @@
 @synthesize theWebView = _theWebView;
 @synthesize theTableView = _theTableView;
 @synthesize levels = _levels, modules = modules_;
-@synthesize rightOverlayView = _rightOverlayView, leftOverlayView = _leftOverlayView, levelLabel = levelLabel_;
+@synthesize rightOverlayView = _rightOverlayView, leftOverlayView = _leftOverlayView, levelLabel = levelLabel_, signLabel = signLabel_;
 @synthesize sectionInfoArray=_sectionInfoArray,openSectionIndex=openSectionIndex_, quoteCell=newsCell_;
 @synthesize iconScrollView = iconScrollView_, iconView=iconView_;
 @synthesize tmpCell = tmpCell_;
@@ -70,6 +71,8 @@
     CGRect newFrame2;
     
     if (menuVisible) {
+        // hide menu
+        // then show Levels
         newFrame = CGRectOffset(_leftOverlayView.frame, -_leftOverlayView.bounds.size.width, 0.0);
         newFrame2 = CGRectOffset(_rightOverlayView.frame, _rightOverlayView.bounds.size.width, 0.0);
 
@@ -80,6 +83,7 @@
         menuVisible = YES;
     }
     
+
     [UIView animateWithDuration:1.0 animations:^{
         _leftOverlayView.frame = newFrame;
         _rightOverlayView.frame = newFrame2;
@@ -163,13 +167,36 @@
 
 - (IBAction)backButtonPushed:(id)sender {
     
-    //CGRect newFrame = CGRectOffset(iconView_.frame, iconView_.bounds.size.width, 0.0);
+    // show iconView
+    // hide leftOverlay
+    
     iconsVisible = YES;
     
-    [UIView animateWithDuration:1.0 animations:^{
-        iconView_.alpha = 1.0;
-    }];
+    CGRect newFrame;
+    CGRect newFrame2;
 
+    newFrame = CGRectOffset(_leftOverlayView.frame, -_leftOverlayView.bounds.size.width, 0.0);
+    newFrame2 = CGRectOffset(iconView_.frame, iconView_.bounds.size.width, 0.0);
+        
+    menuVisible = NO;
+    
+    signLabel_.text = @"Welcome to Grammer Trainer";
+
+
+    
+    
+    [UIView animateWithDuration:0.7 animations:^{
+        _leftOverlayView.frame = newFrame;
+
+    } completion:^(BOOL finished){
+        
+        [UIView animateWithDuration:0.7 animations:^{
+            
+            iconView_.frame = newFrame2;
+            
+        }];
+    }];
+    
 
 }
 
@@ -188,13 +215,37 @@
     
     levelLabel_.text = theLevel.levelName;
     
-    //CGRect newFrame = CGRectOffset(iconView_.frame, -iconView_.bounds.size.width, 0.0);
+    signLabel_.text = theLevel.levelName;
+
+    
+    // hide iconView
+    // show leftOverlay
+    
     iconsVisible = NO;
     
+    CGRect newFrame;
+    CGRect newFrame2;
+    
+    newFrame = CGRectOffset(_leftOverlayView.frame, _leftOverlayView.bounds.size.width, 0.0);
+    newFrame2 = CGRectOffset(iconView_.frame, -iconView_.bounds.size.width, 0.0);
+    
+    menuVisible = YES;
+    
 
-    [UIView animateWithDuration:1.0 animations:^{
-            iconView_.alpha = 0.0;
+    
+    [UIView animateWithDuration:0.7 animations:^{
+        iconView_.frame = newFrame2;
+
+    } completion:^(BOOL finished){
+        
+        [UIView animateWithDuration:0.7 animations:^{
+        
+            _leftOverlayView.frame = newFrame;
+
         }];
+
+        
+    }];
 
     
 }
@@ -317,6 +368,7 @@
     // Instanciate JSON parser library
     json = [ SBJSON new ];
 
+    signLabel_.text = @"Welcome to Grammer Trainer!";
     
 
 }
@@ -444,7 +496,7 @@
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectInset(titleLabelFrame, 10.0, 0)];
     label.text = theModule.name;
     label.font = [UIFont boldSystemFontOfSize:17.0];
-    label.textColor = [UIColor blueColor];
+    label.textColor = [UIColor colorWithRed:0.25 green:0.25 blue:0.70 alpha:1.0];
     label.backgroundColor = [UIColor clearColor];
     
     [sectionView addSubview:label];
@@ -476,7 +528,9 @@
             
     switch (indexPath.row) {
         case 0: {
-            [self loadInstructionsVideo];
+            //[self loadInstructionsVideo];
+            [self loadLesson:theLesson.loadFile];
+
             break;
         }
         case 1: {

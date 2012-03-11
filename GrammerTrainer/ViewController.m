@@ -13,6 +13,7 @@
 #import "SectionInfo.h"
 #import "QuoteCell.h"
 #import "ResultsTableViewCell.h"
+#import "SpreadsheetController.h"
 
 #import <QuartzCore/QuartzCore.h>
 
@@ -31,11 +32,16 @@
 @property (strong, nonatomic) IBOutlet UIView *iconView;
 @property (strong, nonatomic) IBOutlet UILabel *levelLabel;
 @property (strong, nonatomic) IBOutlet UILabel *signLabel;
+@property (strong, nonatomic) IBOutlet UIView *loginView;
+@property (strong, nonatomic) IBOutlet UITextView *loginTextView;
+@property (strong, nonatomic) IBOutlet UITextView *passwordTextView;
+@property (strong, nonatomic) SpreadsheetController *theSpreadsheetController;
 
 @property (strong, nonatomic) NSArray *modules;
 
+- (IBAction)logoutButtonPushed:(id)sender;
 - (IBAction)backButtonPushed:(id)sender;
-
+- (IBAction)userPushedLogin:(id)sender;
 
 @end
 
@@ -54,6 +60,11 @@
 @synthesize sectionInfoArray=_sectionInfoArray,openSectionIndex=openSectionIndex_, quoteCell=newsCell_;
 @synthesize iconScrollView = iconScrollView_, iconView=iconView_;
 @synthesize tmpCell = tmpCell_;
+@synthesize loginView = loginView_;
+@synthesize loginTextView = loginTextView_;
+@synthesize passwordTextView = passwordTextView_;
+@synthesize userName = userName_;
+@synthesize theSpreadsheetController = theSpreadsheetController_;
 
 - (void)didReceiveMemoryWarning
 {
@@ -137,19 +148,14 @@
         
         NSURLRequest *theRequest = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:thePathURL]];
         
-        [_theWebView loadRequest:theRequest];
+        pendingDataModelLoad = YES;
         
+        // This copies selected lesson into initDataModel.js, this will be inserted once page finishes loading
         [self copyOverLesson:lessonFileName];
         
-        // Reinitialize data model
+        [_theWebView loadRequest:theRequest];
+
         
-        NSString *path = [[NSBundle mainBundle] pathForResource:@"initDataModel" ofType:@"js"];
-        
-        NSString *javascriptString = [NSString stringWithContentsOfFile:path encoding:NSASCIIStringEncoding error:nil];
-        
-        // We need to perform selector with afterDelay 0 in order to avoid weird recursion stop
-        // when calling NativeBridge in a recursion more then 200 times :s (fails ont 201th calls!!!)
-        [self performSelector:@selector(returnResultAfterDelay:) withObject:javascriptString afterDelay:2.5];
 
     } else {
         
@@ -163,6 +169,62 @@
     
      
      
+}
+
+- (IBAction)logoutButtonPushed:(id)sender {
+    
+   
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:2.00];
+    [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.view cache:YES];
+    
+    // Remove existing question view
+    [self.view addSubview:loginView_ ];
+    
+    // Animate!
+    [UIView commitAnimations];
+    
+}
+
+
+
+
+- (void)handleCorrectPassword {
+    
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:2.00];
+    [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:self.view cache:YES];
+    
+    // Remove existing question view
+    [loginView_ removeFromSuperview];
+    
+    // Animate!
+    [UIView commitAnimations];
+
+    
+}
+
+- (void)checkPassword:(NSString *)password forUser:(NSString *)user {
+    
+    self.userName = user;
+    NSLog(@"UserName: %@", userName_);
+
+    [self handleCorrectPassword];
+}
+
+
+- (IBAction)userPushedLogin:(id)sender {
+    
+    NSString *theUserName = @"guest";
+    if ([loginTextView_.text length] == 0) {
+        self.userName = @"guest";
+    } else {
+        theUserName = loginTextView_.text;
+    }
+    
+    [self checkPassword:passwordTextView_.text forUser:theUserName];
+    
+    
 }
 
 - (IBAction)backButtonPushed:(id)sender {
@@ -262,7 +324,7 @@
 	
 	NSUInteger xIndex = 0;
 	NSUInteger yIndex = 0;
-	NSUInteger vSpacing = 58;
+	NSUInteger vSpacing = 88;
 	NSUInteger hSpacing = 100;
 	NSUInteger index = 0;
 	
@@ -350,9 +412,16 @@
     
     menuVisible = YES;
     iconsVisible = YES;
+    pendingDataModelLoad = NO;
     
     // Set up default values.
     self.theTableView.sectionHeaderHeight = HEADER_HEIGHT;
+    
+    // Going to post results to a goole spreadsheet
+    theSpreadsheetController_ = [[SpreadsheetController alloc] init];
+    theSpreadsheetController_.delegate = self;    
+    [theSpreadsheetController_ fetchSpreadSheetsForUserName:@"ekille93" andPassWord:@"hang10te"];
+
 
     /*
      The section info array is thrown away in viewWillUnload, so it's OK to set the default values here. If you keep the section information etc. then set the default values in the designated initializer.
@@ -412,6 +481,39 @@
         return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
     } else {
         return YES;
+    }
+}
+
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation duration:(NSTimeInterval)duration {
+    
+    iconScrollView_.frame = CGRectMake(0.0, 72.0, 320.0, 768.0-80.0-20.0-100.0);
+    
+}
+
+#pragma mark Text View Delegate
+
+- (void)textViewDidChange:(UITextView *)textView {
+    
+    if (textView == passwordTextView_) {
+        // See if they hit the enter key
+        if ([textView.text hasSuffix:@"\n"]) {
+            
+            NSString *trimmed = [loginTextView_.text substringWithRange:NSMakeRange(0, [loginTextView_.text length]-1)];
+            
+            [self checkPassword:passwordTextView_.text forUser:trimmed];
+            [textView setText:@""]; // Blank it out
+        }
+    } else {
+        // See if they hit the enter key
+        // loginTextView
+        if ([textView.text hasSuffix:@"\n"]) {
+            
+            NSString *trimmed = [textView.text substringWithRange:NSMakeRange(0, [textView.text length]-1)];
+            textView.text = trimmed;
+            [textView resignFirstResponder];
+            [passwordTextView_ becomeFirstResponder];
+        }
+
     }
 }
 
@@ -601,18 +703,59 @@
         NSLog(@"Did call showMenu");
         [self showMenu];
 
-    }  else {
+    }  else if ([functionName isEqualToString:@"printNative"]) {
+        
+        NSLog(@"Did call printNative");
+        
+        if ([args count]!=3) {
+            NSLog(@"printNative exactly 3 arguments!");
+            return;
+        }
+        NSString *red = (NSString*)[args objectAtIndex:0];
+        NSString *green = (NSString*)[args objectAtIndex:1];
+        NSString *blue = (NSString*)[args objectAtIndex:2];
+        
+        NSDate *now = [NSDate date];
+        
+        NSLog(@"Values: %@, %@, %@, %@, %@",userName_, now, red,green,blue);
+
+        
+    } else {
         NSLog(@"Unimplemented method '%@'",functionName);
     }
 }
 
 #pragma UIWebview Delegate 
 
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    
+    if (pendingDataModelLoad) {
+        
+        pendingDataModelLoad = NO;
+        // intialize datamodel        
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"initDataModel" ofType:@"js"];
+        
+        NSString *javascriptString = [NSString stringWithContentsOfFile:path encoding:NSASCIIStringEncoding error:nil];
+        
+        // We need to perform selector with afterDelay 0 in order to avoid weird recursion stop
+        // when calling NativeBridge in a recursion more then 200 times :s (fails ont 201th calls!!!)
+        [self performSelector:@selector(returnResultAfterDelay:) withObject:javascriptString afterDelay:1.0];
+        
+        //[self returnResultAfterDelay:javascriptString];
+        
+        //     [self.theWebView performSelectorOnMainThread:@selector(stringByEvaluatingJavaScriptFromString:) withObject:str waitUntilDone:NO];
+        
+        //[self.theWebView stringByEvaluatingJavaScriptFromString:javascriptString];
+    }
+
+}
+
 - (BOOL)webView:(UIWebView *)webView2 shouldStartLoadWithRequest:(NSURLRequest *)request  navigationType:(UIWebViewNavigationType)navigationType {
     
 	NSString *requestString = [[request URL] absoluteString];
     
     NSLog(@"request : %@",requestString);
+    
     
     if ([requestString hasPrefix:@"js-frame:"]) {
         
@@ -631,6 +774,44 @@
     
     return YES;
 }
+
+
+#pragma mark - Spreadsheet Delegate
+
+- (void)spreadsheetController:(SpreadsheetController *)controller didFetchSpreadSheets:(NSArray *)entries {
+    
+    //NSString *message = [NSString stringWithFormat:@"Found %d Locations", [entries count]];
+    
+    
+    if ([entries count] > 0) {
+                
+        NSDictionary *customElements;        
+        
+        for (customElements in entries) {
+            
+            GDataSpreadsheetCustomElement *element;
+            element = [customElements objectForKey:@"latitude"];
+            //plotLocation.latitude = [[element stringValue] floatValue];
+            element = [customElements objectForKey:@"longitude"];
+			//plotLocation.longitude = [[element stringValue] floatValue];
+            
+            //CoreOppAnnotation *pin = [[CoreOppAnnotation alloc] initWithCoordinate:plotLocation];
+            element = [customElements objectForKey:@"pintitle"];
+            //pin.theTitle = [element stringValue];
+            element = [customElements objectForKey:@"pinsubtitle"];
+            //pin.theSubtitle = [element stringValue];
+            
+            element = [customElements objectForKey:@"moreinfo"];
+            //pin.urlFurtherInfo = [NSURL URLWithString:[element stringValue]];
+                        
+            NSLog(@"Row: %@", customElements );
+            
+        }
+        
+    }
+    
+}
+
 
 
 

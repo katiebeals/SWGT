@@ -68,6 +68,9 @@ for( var c = 0; c < randomizedQuestions.length; c++ )
 
 // document.write("<video autoplay=\"autoplay\" controls=\"controls\" id=\"video\" width=\"533\" height=\"300\" src=" + randomizedLessonVideos[0] + "></video>");
 
+NativeBridge.call("printNative", ["initDataModel:",randomizedLessonVideos[0],"three"]);
+
+
 $("#video_box").append("<video autoplay=\"autoplay\" controls=\"controls\" id=\"video\" width=\"533\" height=\"300\" src=" + randomizedLessonVideos[0] + "></video>");
 
 // Load the dots (the context needs to be the dotContainer element)

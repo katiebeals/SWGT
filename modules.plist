@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>levelName</key>
+		<string>Pronouns</string>
+		<key>modules</key>
+		<array>
+			<dict>
+				<key>moduleNumber</key>
+				<integer>1</integer>
+				<key>moduleName</key>
+				<string>Module 1</string>
+				<key>topic</key>
+				<string>This is a description of Module 1 content</string>
+				<key>pretest</key>
+				<dict>
+					<key>lessonName</key>
+					<string>Pre-Test</string>
+					<key>loadFile</key>
+					<string>pretest_mod1.js</string>
+				</dict>
+				<key>posttest</key>
+				<dict>
+					<key>lessonName</key>
+					<string>Post-Test</string>
+					<key>loadFile</key>
+					<string>posttest_mod1.js</string>
+				</dict>
+				<key>lessons</key>
+				<array>
+					<dict>
+						<key>lessonNumber</key>
+						<integer>1</integer>
+						<key>lessonName</key>
+						<string>Lesson 1</string>
+						<key>topic</key>
+						<string>Telling what people are saying</string>
+						<key>loadFile</key>
+						<string>lesson_1.js</string>
+					</dict>
+					<dict>
+						<key>lessonNumber</key>
+						<integer>2</integer>
+						<key>lessonName</key>
+						<string>Lesson 2</string>
+						<key>topic</key>
+						<string>Telling what people are saying with SAYING THAT</string>
+						<key>loadFile</key>
+						<string>lesson_2.js</string>
+					</dict>
+					<dict>
+						<key>lessonNumber</key>
+						<integer>3</integer>					
+						<key>lessonName</key>
+						<string>Lesson 3</string>
+						<key>topic</key>
+						<string>Telling what people are saying with and without SAYING THAT</string>
+						<key>loadFile</key>
+						<string>lesson_3.js</string>
+					</dict>
+				</array>
+			</dict>
+		</array>
+	</dict>
+	<dict>
+		<key>levelName</key>
+		<string>Phrase Trainer</string>
+		<key>modules</key>
+		<array>
+			<dict>
+				<key>moduleNumber</key>
+				<integer>1</integer>
+				<key>moduleName</key>
+				<string>Module 1</string>
+				<key>topic</key>
+				<string>This is a description of Module 1 content</string>
+				<key>pretest</key>
+				<dict>
+					<key>lessonName</key>
+					<string>Pre-Test</string>
+					<key>loadFile</key>
+					<string>pretest_mod1.js</string>
+				</dict>
+				<key>posttest</key>
+				<dict>
+					<key>lessonName</key>
+					<string>Post-Test</string>
+					<key>loadFile</key>
+					<string>posttest_mod1.js</string>
+				</dict>
+				<key>lessons</key>
+				<array>
+					<dict>
+						<key>lessonNumber</key>
+						<integer>1</integer>
+						<key>lessonName</key>
+						<string>Lesson 1</string>
+						<key>topic</key>
+						<string>Telling what people are saying</string>
+						<key>loadFile</key>
+						<string>lesson_1.js</string>
+					</dict>
+					<dict>
+						<key>lessonNumber</key>
+						<integer>2</integer>
+						<key>lessonName</key>
+						<string>Lesson 2</string>
+						<key>topic</key>
+						<string>Telling what people are saying with SAYING THAT</string>
+						<key>loadFile</key>
+						<string>lesson_2.js</string>
+					</dict>
+					<dict>
+						<key>lessonNumber</key>
+						<integer>3</integer>					
+						<key>lessonName</key>
+						<string>Lesson 3</string>
+						<key>topic</key>
+						<string>Telling what people are saying with and without SAYING THAT</string>
+						<key>loadFile</key>
+						<string>lesson_3.js</string>
+					</dict>
+				</array>
+			</dict>
+		</array>
+	</dict>	
+</array>
+</plist>

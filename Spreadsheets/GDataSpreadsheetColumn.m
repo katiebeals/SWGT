@@ -45,8 +45,7 @@ static NSString* const kIndexAttr = @"index";
 }
 
 - (void)addParseDeclarations {
-  NSArray *attrs = [NSArray arrayWithObjects:
-                    kNameAttr, kIndexAttr, nil];
+  NSArray *attrs = @[kNameAttr, kIndexAttr];
 
   [self addLocalAttributeDeclarations:attrs];
 }

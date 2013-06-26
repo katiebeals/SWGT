@@ -8,12 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
-@class ViewController;
+@class ViewController, Reachability;
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate> {
+    
+    Reachability* hostReach;
+
+}
 
 @property (strong, nonatomic) UIWindow *window;
 
 @property (strong, nonatomic) ViewController *viewController;
+
+- (void)readInDataModel:(NSString *)fileName forUser:(NSString *)user;
+
 
 @end

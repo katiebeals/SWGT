@@ -4,6 +4,144 @@
 <array>
 	<dict>
 		<key>levelName</key>
+		<string>Tutorial</string>
+		<key>modules</key>
+		<array>
+			<dict>
+				<key>moduleNumber</key>
+				<integer>3</integer>
+				<key>moduleName</key>
+				<string>Practice Time</string>
+				<key>topic</key>
+				<string>This is a description</string>
+				<key>lessons</key>
+				<array>
+					<dict>
+						<key>lessonNumber</key>
+						<integer>1</integer>
+						<key>lessonName</key>
+						<string>Getting Started</string>
+						<key>topic</key>
+						<string>with Pronoun Lessons</string>
+						<key>loadFile</key>
+						<string>pn_lesson_1.json</string>
+						<key>showMultipleChoice</key>
+						<string>YES</string>
+					</dict>
+					<dict>
+						<key>lessonNumber</key>
+						<integer>2</integer>
+						<key>lessonName</key>
+						<string>Getting Started</string>
+						<key>topic</key>
+						<string>with Phrase Trainer</string>
+						<key>loadFile</key>
+						<string>pt_lesson_1.json</string>
+					</dict>
+				</array>
+			</dict>
+		</array>
+	</dict>
+	<dict>
+		<key>levelName</key>
+		<string>Phrases</string>
+		<key>modules</key>
+		<array>
+			<dict>
+				<key>moduleNumber</key>
+				<integer>1</integer>
+				<key>moduleName</key>
+				<string>Module 1</string>
+				<key>topic</key>
+				<string>This is a description of Module 1 content</string>
+				<key>lessons</key>
+				<array>
+					<dict>
+						<key>lessonNumber</key>
+						<integer>1</integer>
+						<key>lessonName</key>
+						<string>Lesson 1</string>
+						<key>topic</key>
+						<string>Shapes</string>
+						<key>loadFile</key>
+						<string>pt_lesson_1.json</string>
+					</dict>
+					<dict>
+						<key>lessonNumber</key>
+						<integer>2</integer>
+						<key>lessonName</key>
+						<string>Lesson 2</string>
+						<key>topic</key>
+						<string>More Shapes</string>
+						<key>loadFile</key>
+						<string>pt_lesson_2.json</string>
+					</dict>
+					<dict>
+						<key>lessonNumber</key>
+						<integer>3</integer>
+						<key>lessonName</key>
+						<string>Lesson 3</string>
+						<key>topic</key>
+						<string>Even More Shapes</string>
+						<key>loadFile</key>
+						<string>pt_lesson_3.json</string>
+					</dict>
+					<dict>
+						<key>lessonNumber</key>
+						<integer>4</integer>
+						<key>lessonName</key>
+						<string>Lesson 4</string>
+						<key>topic</key>
+						<string>Colored Shapes</string>
+						<key>loadFile</key>
+						<string>pt_lesson_4.json</string>
+					</dict>
+					<dict>
+						<key>lessonNumber</key>
+						<integer>5</integer>
+						<key>lessonName</key>
+						<string>Lesson 5</string>
+						<key>topic</key>
+						<string>More Colored Shapes</string>
+						<key>loadFile</key>
+						<string>pt_lesson_5.json</string>
+					</dict>
+					<dict>
+						<key>lessonNumber</key>
+						<integer>6</integer>
+						<key>lessonName</key>
+						<string>Lesson 6</string>
+						<key>topic</key>
+						<string>What color is the shape?</string>
+						<key>loadFile</key>
+						<string>pt_lesson_6.json</string>
+					</dict>
+					<dict>
+						<key>lessonNumber</key>
+						<integer>7</integer>
+						<key>lessonName</key>
+						<string>Lesson 7</string>
+						<key>topic</key>
+						<string>What color are the shapes?</string>
+						<key>loadFile</key>
+						<string>pt_lesson_7.json</string>
+					</dict>
+					<dict>
+						<key>lessonNumber</key>
+						<integer>8</integer>
+						<key>lessonName</key>
+						<string>Lesson 8</string>
+						<key>topic</key>
+						<string>Where is the shape?</string>
+						<key>loadFile</key>
+						<string>pt_lesson_8.json</string>
+					</dict>
+				</array>
+			</dict>
+		</array>
+	</dict>
+	<dict>
+		<key>levelName</key>
 		<string>Pronouns</string>
 		<key>modules</key>
 		<array>
@@ -14,117 +152,120 @@
 				<string>Module 1</string>
 				<key>topic</key>
 				<string>This is a description of Module 1 content</string>
-				<key>pretest</key>
-				<dict>
-					<key>lessonName</key>
-					<string>Pre-Test</string>
-					<key>loadFile</key>
-					<string>pretest_mod1.js</string>
-				</dict>
-				<key>posttest</key>
-				<dict>
-					<key>lessonName</key>
-					<string>Post-Test</string>
-					<key>loadFile</key>
-					<string>posttest_mod1.js</string>
-				</dict>
 				<key>lessons</key>
 				<array>
 					<dict>
 						<key>lessonNumber</key>
 						<integer>1</integer>
 						<key>lessonName</key>
-						<string>Lesson 1</string>
+						<string>Direct Speech Int (16) Modeling</string>
 						<key>topic</key>
 						<string>Telling what people are saying</string>
 						<key>loadFile</key>
-						<string>lesson_1.js</string>
+						<string>pn_lesson_1.json</string>
+						<key>showMultipleChoice</key>
+						<string>YES</string>
 					</dict>
 					<dict>
 						<key>lessonNumber</key>
 						<integer>2</integer>
 						<key>lessonName</key>
-						<string>Lesson 2</string>
+						<string>Direct Speech Int (16)</string>
 						<key>topic</key>
-						<string>Telling what people are saying with SAYING THAT</string>
+						<string>Telling what people are saying</string>
 						<key>loadFile</key>
-						<string>lesson_2.js</string>
+						<string>pn_lesson_1.json</string>
+						<key>showMultipleChoice</key>
+						<string>NO</string>
 					</dict>
 					<dict>
 						<key>lessonNumber</key>
-						<integer>3</integer>					
+						<integer>3</integer>
 						<key>lessonName</key>
-						<string>Lesson 3</string>
+						<string>Direct Speech Gen (16)</string>
+						<key>topic</key>
+						<string>Telling what people are saying</string>
+						<key>loadFile</key>
+						<string>pn_lesson_1_gen.json</string>
+						<key>showMultipleChoice</key>
+						<string>NO</string>
+					</dict>
+					<dict>
+						<key>lessonNumber</key>
+						<integer>4</integer>
+						<key>lessonName</key>
+						<string>Indirect Speech Int (16) Modeling</string>
+						<key>topic</key>
+						<string>Telling what people are saying with SAYING THAT</string>
+						<key>loadFile</key>
+						<string>pn_lesson_2.json</string>
+						<key>showMultipleChoice</key>
+						<string>YES</string>
+					</dict>
+					<dict>
+						<key>lessonNumber</key>
+						<integer>5</integer>
+						<key>lessonName</key>
+						<string>Indirect Speech Int (16)</string>
+						<key>topic</key>
+						<string>Telling what people are saying with SAYING THAT</string>
+						<key>loadFile</key>
+						<string>pn_lesson_2.json</string>
+						<key>showMultipleChoice</key>
+						<string>NO</string>
+					</dict>
+					<dict>
+						<key>lessonNumber</key>
+						<integer>6</integer>
+						<key>lessonName</key>
+						<string>Indirect Speech Gen (16)</string>
+						<key>topic</key>
+						<string>Telling what people are saying with SAYING THAT</string>
+						<key>loadFile</key>
+						<string>pn_lesson_2_gen.json</string>
+						<key>showMultipleChoice</key>
+						<string>NO</string>
+					</dict>
+					<dict>
+						<key>lessonNumber</key>
+						<integer>5</integer>
+						<key>lessonName</key>
+						<string>Mixed Speech Int (32) Modeling</string>
 						<key>topic</key>
 						<string>Telling what people are saying with and without SAYING THAT</string>
 						<key>loadFile</key>
-						<string>lesson_3.js</string>
+						<string>pn_lesson_3.json</string>
+						<key>showMultipleChoice</key>
+						<string>YES</string>
+					</dict>
+					<dict>
+						<key>lessonNumber</key>
+						<integer>5</integer>
+						<key>lessonName</key>
+						<string>Mixed Speech Int (32)</string>
+						<key>topic</key>
+						<string>Telling what people are saying with and without SAYING THAT</string>
+						<key>loadFile</key>
+						<string>pn_lesson_3.json</string>
+						<key>showMultipleChoice</key>
+						<string>NO</string>
+					</dict>
+					<dict>
+						<key>lessonNumber</key>
+						<integer>6</integer>
+						<key>lessonName</key>
+						<string>Mixed Speech Gen (32)</string>
+						<key>topic</key>
+						<string>Telling what people are saying with and without SAYING THAT</string>
+						<key>loadFile</key>
+						<string>pn_lesson_3.json</string>
+						<key>showMultipleChoice</key>
+						<string>NO</string>
 					</dict>
 				</array>
 			</dict>
 		</array>
 	</dict>
-	<dict>
-		<key>levelName</key>
-		<string>Phrase Trainer</string>
-		<key>modules</key>
-		<array>
-			<dict>
-				<key>moduleNumber</key>
-				<integer>1</integer>
-				<key>moduleName</key>
-				<string>Module 1</string>
-				<key>topic</key>
-				<string>This is a description of Module 1 content</string>
-				<key>pretest</key>
-				<dict>
-					<key>lessonName</key>
-					<string>Pre-Test</string>
-					<key>loadFile</key>
-					<string>pretest_mod1.js</string>
-				</dict>
-				<key>posttest</key>
-				<dict>
-					<key>lessonName</key>
-					<string>Post-Test</string>
-					<key>loadFile</key>
-					<string>posttest_mod1.js</string>
-				</dict>
-				<key>lessons</key>
-				<array>
-					<dict>
-						<key>lessonNumber</key>
-						<integer>1</integer>
-						<key>lessonName</key>
-						<string>Lesson 1</string>
-						<key>topic</key>
-						<string>Telling what people are saying</string>
-						<key>loadFile</key>
-						<string>lesson_1.js</string>
-					</dict>
-					<dict>
-						<key>lessonNumber</key>
-						<integer>2</integer>
-						<key>lessonName</key>
-						<string>Lesson 2</string>
-						<key>topic</key>
-						<string>Telling what people are saying with SAYING THAT</string>
-						<key>loadFile</key>
-						<string>lesson_2.js</string>
-					</dict>
-					<dict>
-						<key>lessonNumber</key>
-						<integer>3</integer>					
-						<key>lessonName</key>
-						<string>Lesson 3</string>
-						<key>topic</key>
-						<string>Telling what people are saying with and without SAYING THAT</string>
-						<key>loadFile</key>
-						<string>lesson_3.js</string>
-					</dict>
-				</array>
-			</dict>
-		</array>
-	</dict>	
+	
 </array>
 </plist>

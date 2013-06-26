@@ -13,5 +13,6 @@
 
 @property (nonatomic, strong) NSString *levelName;
 @property (nonatomic, strong) NSArray *modules;
+@property (nonatomic, strong) NSNumber *index;
 
 @end

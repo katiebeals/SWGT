@@ -47,15 +47,14 @@ static NSString* const kStartRowAttr = @"startRow";
 
   GDataSpreadsheetData *obj = [self object];
 
-  [obj setStartIndex:[NSNumber numberWithInt:startRow]];
-  [obj setNumberOfRows:[NSNumber numberWithInt:numRows]];
+  [obj setStartIndex:@(startRow)];
+  [obj setNumberOfRows:@(numRows)];
   [obj setInsertionMode:insertionMode];
   return obj;
 }
 
 - (void)addParseDeclarations {
-  NSArray *attrs = [NSArray arrayWithObjects:
-                    kStartRowAttr, kNumRowsAttr, kInsertionModeAttr, nil];
+  NSArray *attrs = @[kStartRowAttr, kNumRowsAttr, kInsertionModeAttr];
 
   [self addLocalAttributeDeclarations:attrs];
 }

@@ -1,0 +1,92 @@
+http://leo.goodwin.drexel.edu/grammerapp/grammerAppReport.php
+
+1.9
+    - Added synching from http://stream.goodwin.drexel.edu/grammerapp/jsoneditoronline/app/web/
+    - The following web site can be used to modify the lesson files:
+    http://stream.goodwin.drexel.edu/grammerapp/jsoneditoronline/app/web/test.html
+    - Login/Auth now uses grammer.trainer@gmail.com with password: Grammer@Trainer
+    
+    - http://tflig.ht/104fPUY
+
+1.8
+- Added synching from https://dl.dropbox.com/u/26582460/grammerApp/lessonFiles.json
+ The lessonFiles.json contains a list of files hosted in the same directory, which will be downloaded by the app everytime it starts up.
+ 
+
+
+TODO: 
+
+- Get rid of "report that" with "what goes in the bubble.."
+- Think about "next" button, automatically going to next lesson once user gets it right
+- Play (audio) the answer once the user gets it correct (in gender of speaker)
+- Each Exercise should have an A, B, and C part
+
+- Add the prefill to the UI on pronoun Lesson 2
+- Create pronoun Lesson 3 for mixed direct and indirect speech
+- review grammerAppReport for content, make mods as needed
+- add Generalization phase to lesson 1 and lesson 2 (where multiple choice is not available)
+- how do we want to handle the "exit" button? Currently the user looses everything if they exit, could add logic to save state
+- shapes need to be gray fill with black stroke
+- Need to add logic to for off-line operation, save results until a connection is established a trasmit back log
+- Add animations for rewards
+
+Revision
+
+1.5
+    - Merged pronouns into nouns list
+    - Added passwords configured via Goolge Docs
+    - Added pronoun Lesson 2
+    - Fill in speech bubble as the user types for pronoun Lesson 1
+    - Added poster attribute to the video tag to get rid of initial black screen before video is played
+    
+    - Wrote getPosters.pl to loop through directory of m4v files and create a poster image for each
+    
+    
+1.4
+
+
+1.3
+
+
+Saving State
+-------------
+saveProgramState() is callled to save program state, which makes a callback to the native side to
+
+- (void)handleCall:(NSString*)functionName callbackId:(int)callbackId args:(NSArray*)args
+
+On loading a page in - (void)webViewDidFinishLoad:(UIWebView *)webView {
+
+the json file is read in if exist, javascript is created and injected in
+
+
+
+
+gt_main.html
+
+
+- once the page finishes loading, it calls NativeBridge lessonLoaded, which is handled by ViewController handleCallback:callBackID:params method
+
+ViewController.html
+
+- (void)loadLesson()
+
+    1. Pass in the name of the "lesson.json" as an query parameter to gt_main.html
+        gt_main.html?lesson=pt_lesson.json
+Note: uses a function called queryString() to get the query string from the URL
+Note: than calls myLoadJson() with XMLHttpRequest() to load a local json file
+Note: Lastly it calls myJsonTextToObject() to create an object out of json text
+
+the javascript updateGender() makes text substitutions where gender specific pronouns are needed
+
+        (Note: set standAlone flag in myJsonTextToObject to load page outside of xcode environment)
+	2. Start loading gt_main.html, wait for webViewDidFinishLoad
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+
+	3. Now that gt_main.html has finished loading, inject javascript to initialize UI using initDataModel.js
+	4. The last thing that initDataModel.js does is call appLoaded() which hides the web based loading screen then calls NativeBridge(lessonLoaded)
+	 
+	
+- (void)handleCall:(NSString*)functionName callbackId:(int)callbackId args:(NSArray*)args
+
+	5. Handles callback for lessonLoaded, called showMenu() to animate the menu out of view

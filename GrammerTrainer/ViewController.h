@@ -10,21 +10,20 @@
 #import "SBJSON.h"
 #import "SectionHeaderView.h"
 
-@class QuoteCell; // SpreadsheetController;
+@class QuoteCell, Lesson; // SpreadsheetController;
 
-@interface ViewController : UIViewController <UIWebViewDelegate, UITableViewDataSource, UITableViewDelegate, SectionHeaderViewDelegate, UITextViewDelegate> {
+@interface ViewController : UIViewController <UIWebViewDelegate, UITableViewDataSource, UITableViewDelegate, SectionHeaderViewDelegate, UITextViewDelegate, UIAlertViewDelegate> {
     
     SBJSON *json;
     BOOL menuVisible;
     BOOL iconsVisible;
     BOOL pendingDataModelLoad;
     
-
 }
 
 @property (strong, nonatomic) NSArray *levels;
 
-@property (nonatomic, weak) IBOutlet QuoteCell *quoteCell;
+@property (nonatomic, assign) IBOutlet QuoteCell *quoteCell;
 
 
 @property (strong, nonatomic) IBOutlet UIWebView *theWebView;
@@ -34,6 +33,7 @@
 @property (strong, nonatomic) IBOutlet UIView *leftOverlayView;
 
 @property (strong, nonatomic) NSString *userName;
+
 
 
 

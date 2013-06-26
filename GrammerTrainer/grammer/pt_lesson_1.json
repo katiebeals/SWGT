@@ -1,0 +1,124 @@
+{
+	"pronounWords": [
+	    "it", 
+	    "this", 
+	    "that", 
+	    "they", 
+	    "these", 
+	    "those"
+	], 
+	"nounWords": [
+	    "a", 
+	    "an", 
+	    "the", 
+	    "arrow", 
+	    "arrows", 
+	    "circle", 
+	    "circles", 
+	    "oval", 
+	    "ovals", 
+	    "rectangle", 
+	    "rectangles", 
+	    "square", 
+	    "squares", 
+	    "triangle", 
+	    "triangles"
+	], 
+	"adjectiveWords": [
+	    "blue", 
+	    "green", 
+	    "orange", 
+	    "red", 
+	    "yellow"
+	], 
+	"verbWords": [
+	    "is", 
+	    "are"
+	],
+    "exerciseArray": [
+        {
+            "lessonImage": "Cc.jpg", 
+            "unneededWords": [
+                "one"
+            ], 
+            "multipleChoice": [
+                "A circle.", 
+                "A square.", 
+                "A triangle.", 
+                "A rectangle."
+            ], 
+            "question": "What is this?", 
+            "answers": [
+                "it is a circle .", 
+                "it's a circle .", 
+                "this is a circle .", 
+                "that is a circle .", 
+                "that's a circle .", 
+                "a circle ."
+            ]
+        }, 
+        {
+            "lessonImage": "Sq.jpg", 
+            "unneededWords": [
+                "one"
+            ], 
+            "multipleChoice": [
+                "A circle.", 
+                "A square.", 
+                "A triangle.", 
+                "A rectangle."
+            ], 
+            "question": "What is this?", 
+            "answers": [
+                "it is a square .", 
+                "it's a square .", 
+                "this is a square .", 
+                "that is a square .", 
+                "that's a square .", 
+                "a square ."
+            ]
+        }, 
+        {
+            "lessonImage": "Tg.jpg", 
+            "unneededWords": [
+                "one"
+            ], 
+            "multipleChoice": [
+                "A circle.", 
+                "A square.", 
+                "A triangle.", 
+                "A rectangle."
+            ], 
+            "question": "What is this?", 
+            "answers": [
+                "it is a triangle .", 
+                "it's a triangle .", 
+                "this is a triangle .", 
+                "that is a triangle .", 
+                "that's a triangle .", 
+                "a triangle ."
+            ]
+        }, 
+        {
+            "lessonImage": "Rt.jpg", 
+            "unneededWords": [
+                "one"
+            ], 
+            "multipleChoice": [
+                "A circle.", 
+                "A square.", 
+                "A triangle.", 
+                "A rectangle."
+            ], 
+            "question": "What is this?", 
+            "answers": [
+                "it is a rectangle .", 
+                "it's a rectangle .", 
+                "this is a rectangle .", 
+                "that is a rectangle .", 
+                "that's a rectangle .", 
+                "a rectangle ."
+            ]
+        }
+    ]
+}

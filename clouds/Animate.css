@@ -1,0 +1,138 @@
+
+body
+{
+	background-color: transparent;
+
+    margin: 0px;
+
+	height: 768px;
+	width: 1024px;
+	font-size:18px;
+
+	background-repeat:no-repeat;
+
+}
+
+
+
+#sunContainer 
+{
+    position: absolute;
+	height: 768px;
+	width: 1024px;
+    z-index: 2;
+    overflow: hidden;
+}
+
+#sunContainer > img {
+
+    position: absolute;
+    z-index: 10;
+    height: 768px;
+	width: 1024px;
+	left:0px;
+	top:0px;
+}
+
+#stickContainer 
+{
+    position: absolute;
+	height: 229px;
+	width: 42px;
+    z-index: 2;
+    overflow: hidden;
+	left:882px;
+	top:500px;
+
+}
+
+#stickContainer > img {
+
+    position: absolute;
+    z-index: 10;
+    height: 229px;
+	width: 42px;
+}
+
+#sunContainer > div > img {
+     position: absolute;
+     width: 205px;
+     height: 205px;
+	left:800px;
+	top:400px;
+
+     -webkit-animation-iteration-count: infinite;
+     -webkit-animation-direction: normal;
+     -webkit-animation-timing-function: linear;
+}
+
+#cloudContainer 
+{
+    position: absolute;
+	height: 768px;
+	width: 1024px;
+    z-index: 1;
+    overflow: hidden;
+}
+
+#cloudContainer > div > img {
+     position: absolute;
+     width: 140px;
+     height: 100px;
+	left:0px;
+	top:10px;
+
+     -webkit-animation-iteration-count: infinite;
+     -webkit-animation-direction: normal;
+     -webkit-animation-timing-function: linear;
+}
+
+#largeCloudContainer 
+{
+    position: absolute;
+	left:0px;
+	top:0px;
+	height: 768px;
+	width: 1024px;
+    z-index: 2;
+    overflow: hidden;
+}
+
+#largeCloudContainer > div > img {
+     position: absolute;
+	left:100px;
+	top:50px;
+     width: 260px;
+     height: 117px;
+
+     -webkit-animation-iteration-count: infinite;
+     -webkit-animation-direction: normal;
+     -webkit-animation-timing-function: linear;
+}
+
+
+/* Hides a cloud towards the very end of the animation */
+@-webkit-keyframes fade
+{
+    0%   { opacity: 1; }
+    95%  { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+
+/* Makes a cloud move left to right, 0 to 1024 pixels along the x-axis */
+@-webkit-keyframes panRight
+{
+    0%   { -webkit-transform: translate(0px, 0px); }
+    100% { -webkit-transform: translate(1024px, 0px); }
+}
+
+/* Rotates sun from 0 to 360 degrees in 2D space */
+@-webkit-keyframes clockwiseSpin
+{
+    0%   { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(359deg); }
+}
+
+
+

@@ -16,9 +16,9 @@
 
 @interface QuoteCell : UITableViewCell 
 
-@property (nonatomic, weak) IBOutlet UILabel *characterLabel;
-@property (nonatomic, weak) IBOutlet UILabel *actAndSceneLabel;
-@property (nonatomic, weak) IBOutlet UILabel *subLabel;
+@property (assign) IBOutlet UILabel *characterLabel;
+@property (assign) IBOutlet UILabel *actAndSceneLabel;
+@property (assign) IBOutlet UILabel *subLabel;
 
 @property (nonatomic, strong) Lesson *lesson;
 

@@ -14,6 +14,8 @@
 
 @interface Module : NSObject 
 
+@property (nonatomic, strong) NSNumber *index;
+@property (nonatomic, strong) NSNumber *moduleNumber;
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSArray *lessons;
 

@@ -14,7 +14,11 @@
 
 @implementation Lesson
 
-@synthesize lessonName, topic, loadFile;
+@synthesize lessonName, topic, loadFile, lessonNumber, showMultipleChoice, index, resultsDictionary;
 
+- (NSString *)description {
+    
+    return [NSString stringWithFormat:@"lessonName: %@\n topic:%@\n loadFile: %@\n lessonNumber: %@\n", lessonName, topic, loadFile, lessonNumber];
+}
 
 @end

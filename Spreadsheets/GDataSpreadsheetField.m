@@ -46,8 +46,7 @@ static NSString* const kFormulaAttr = @"formula";
 }
 
 - (void)addParseDeclarations {
-  NSArray *attrs = [NSArray arrayWithObjects:
-                    kNameAttr, kIndexAttr, kFormulaAttr, nil];
+  NSArray *attrs = @[kNameAttr, kIndexAttr, kFormulaAttr];
 
   [self addLocalAttributeDeclarations:attrs];
 

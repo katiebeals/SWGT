@@ -1,0 +1,146 @@
+{
+    "pronounWords": [
+        "it", 
+        "this", 
+        "that", 
+        "they", 
+        "these", 
+        "those"
+    ], 
+    "nounWords": [
+        "a",
+        "an",          
+        "the", 
+        "arrow", 
+        "arrows", 
+        "diamond", 
+        "diamonds", 
+        "circle", 
+        "circles", 
+        "oval", 
+        "ovals", 
+        "rectangle", 
+        "rectangles", 
+        "square", 
+        "squares", 
+        "triangle", 
+        "triangles"
+    ], 
+    "exerciseArray": [
+        {
+            "lessonImage": "BlCcs.jpg", 
+            "question": "What color are the circles?", 
+            "multipleChoice": [
+                "The circles are green.", 
+                "The circles are yellow.", 
+                "The circles are blue.", 
+                "The circles are red."
+            ], 
+            "unneededWords": [
+                "two"
+            ], 
+            "answers": [
+                "the circles are blue .", 
+                "they are blue .", 
+                "they're blue ."
+            ], 
+            "pronounNounLists": [
+                "they,circles,"
+            ], 
+            "subjectRequest": [
+                "circle", 
+                "it", 
+                "they"
+            ]
+        }, 
+        {
+            "lessonImage": "BlSqs.jpg", 
+            "question": "What color are the squares?", 
+            "multipleChoice": [
+                "The squares are blue.", 
+                "The squares are yellow.", 
+                "The squares are green.", 
+                "The squares are red."
+            ], 
+            "unneededWords": [
+                "three"
+            ], 
+            "answers": [
+                "the squares are blue .", 
+                "they are blue .", 
+                "they're blue ."
+            ], 
+            "pronounNounLists": [
+                "they,squares,"
+            ], 
+            "subjectRequest": [
+                "square", 
+                "it", 
+                "they"
+            ]
+        }, 
+        {
+            "lessonImage": "RdCcs.jpg", 
+            "question": "What color are the circles?", 
+            "multipleChoice": [
+                "The circles are red.", 
+                "The circles are green.", 
+                "The circles are yellow.", 
+                "The circles are blue."
+            ], 
+            "unneededWords": [
+                "two"
+            ], 
+            "answers": [
+                "the circles are red .", 
+                "they are red .", 
+                "they're red ."
+            ], 
+            "pronounNounLists": [
+                "they,circles,"
+            ], 
+            "subjectRequest": [
+                "circle", 
+                "it", 
+                "they"
+            ]
+        }, 
+        {
+            "lessonImage": "RdSqs.jpg", 
+            "question": "What color are the squares?", 
+            "multipleChoice": [
+                "The squares are green.", 
+                "The squares are yellow.", 
+                "The squares are blue.", 
+                "The squares are red."
+            ], 
+            "unneededWords": [
+                "three"
+            ], 
+            "answers": [
+                "the squares are red .", 
+                "they are red .", 
+                "they're red ."
+            ], 
+            "pronounNounLists": [
+                "they,squares,"
+            ], 
+            "subjectRequest": [
+                "square", 
+                "it", 
+                "they"
+            ]
+        }
+    ], 
+    "adjectiveWords": [
+        "blue", 
+        "green", 
+        "orange", 
+        "red", 
+        "yellow"
+    ], 
+    "verbWords": [
+        "is", 
+        "are"
+    ]
+}

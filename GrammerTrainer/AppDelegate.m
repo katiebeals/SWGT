@@ -12,11 +12,11 @@
 #import "Level.h"
 #import "Module.h"
 #import "Lesson.h"
+#import "Reachability.h"
 
 @interface AppDelegate ()
 
 @property (nonatomic, strong) NSArray *levels;
-- (void)readInDataModel;
 
 @end
 
@@ -39,22 +39,167 @@
     /*
      Get the levels,modules, and lessons data from the plist, then pass the array on to the table view controller.
      */
-    [self readInDataModel];
+    //[self readInDataModel:@"moduleFull"];
     
-    self.viewController.levels = self.levels;
+    
+    // Observe the kNetworkReachabilityChangedNotification. When that notification is posted, the
+    // method "reachabilityChanged" will be called. 
+    [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(reachabilityChanged:) name: kReachabilityChangedNotification object: nil];
+    
+    //Change the host name here to change the server your monitoring
+	hostReach = [Reachability reachabilityWithHostName: @"www.apple.com"];
+	[hostReach startNotifier];
 
-    
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
     return YES;
 }
 
-- (void)readInDataModel {
+//Called by Reachability whenever status changes.
+- (void) reachabilityChanged: (NSNotification* )note
+{
+	Reachability* curReach = [note object];
+	NSParameterAssert([curReach isKindOfClass: [Reachability class]]);
     
-    NSURL *url = [[NSBundle mainBundle] URLForResource:@"grammerManifest" withExtension:@"plist"];
+    NetworkStatus netStatus = [curReach currentReachabilityStatus];
+    BOOL connectionRequired= [curReach connectionRequired];
+    NSString* statusString= @"";
+    switch (netStatus)
+    {
+        case NotReachable:
+        {
+            statusString = @"Access Not Available";
+
+            //Minor interface detail- connectionRequired may return yes, even when the host is unreachable.  We cover that up here...
+            connectionRequired= NO;  
+            break;
+        }
+            
+        case ReachableViaWWAN:
+        {
+            statusString = @"Reachable WWAN";
+            break;
+        }
+        case ReachableViaWiFi:
+        {
+            statusString= @"Reachable WiFi";
+            [self sendOfflineEntriesToServerIfExist];
+            break;
+        }
+    }
+    
+    NSLog(@"Network Status: %@", statusString);
+
+
+
+}
+
+- (NSString *)docDir {
+    
+    // Open a stream for the file we're going to receive into.
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    
+    return documentsDirectory;    
+}
+
+
+- (void)sendOfflineEntriesToServerIfExist {
+	
+    
+    NSString *path = [[self docDir] stringByAppendingPathComponent:@"offline.plist"];
+    
+    NSMutableArray *cacheArray;
+    
+    if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
+        // File found, need to send entries to server
+        cacheArray = [[NSMutableArray alloc] initWithContentsOfFile:path];
+        
+        
+        if (cacheArray) {
+            
+            for (NSString *theURL in cacheArray) {
+                
+                NSLog(@"Sending offline cache to server with %d entries", [cacheArray count]);
+
+                // create the request
+                NSURLRequest *theRequest=[NSURLRequest requestWithURL:[NSURL URLWithString:theURL]
+                                                          cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                      timeoutInterval:60.0];
+                
+                [NSURLConnection sendAsynchronousRequest:theRequest queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *theData, NSError *error) {
+                    
+
+                    // If there was an error getting the data
+                    if (error) {
+                        
+                        // Save the encoded URL to a file, we'll try again later                        
+                        [cacheArray addObject:theRequest.URL.absoluteString];            
+                        [cacheArray writeToFile:path atomically:YES];
+                        
+                        NSLog(@"Error: %@", error);
+                        return;
+                    } else {
+                        // Great!
+                        NSLog(@"Send OK");
+                        [cacheArray removeObject:theURL];
+                        
+                        // update plist
+                        if ([cacheArray count]) {
+                            NSLog(@"Updates made but not all offline entries sent");
+                            [cacheArray writeToFile:path atomically:YES];
+                        } else {
+                            NSLog(@"All offline entries sent");
+                            [[NSFileManager defaultManager] removeItemAtPath:path error:nil];
+                        }
+
+                    }
+
+                }];
+
+            }
+            
+        }
+    } 
+}
+
+
+
+// Levels, Modules ,Lessons
+- (void)readInDataModel:(NSString *)fileName forUser:(NSString *)user {
+    
+
+    NSURL *url = [[NSBundle mainBundle] URLForResource:fileName withExtension:@"plist"];
     
     NSArray *levelDictionaries = [[NSArray alloc ] initWithContentsOfURL:url];
+    
+//     NSError *error;
 
+    
+//    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:levelDictionaries
+//                                                       options:NSJSONWritingPrettyPrinted // Pass 0 if you don't care about the readability of the generated string
+//                                                         error:&error];
+    
+//    NSString *jsonUrl = @"https://dl.dropbox.com/u/26582460/grammerApp/grammerManifest.json";
+//    NSData *jsonData = [NSData dataWithContentsOfURL:[NSURL URLWithString:jsonUrl]];
+//    
+//    
+//    if (! jsonData) {
+//        NSLog(@"Got an error: %@", error);
+//    } else {
+//        NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+//        NSLog(@"JSON: %@", jsonString);
+//    }
+//
+//    
+//    NSArray* levelDictionaries = [NSJSONSerialization
+//                          JSONObjectWithData:jsonData //1
+//                          
+//                          options:kNilOptions
+//                          error:&error];
+    
+    
+    
     // This will hold the Level objects we create in the loop
     NSMutableArray *levelsArray = [NSMutableArray arrayWithCapacity:[levelDictionaries count]];
     
@@ -72,6 +217,7 @@
             
             Module *module = [[Module alloc] init];
             module.name = [moduleDictionary objectForKey:@"moduleName"];
+            module.moduleNumber = [moduleDictionary objectForKey:@"moduleNumber"];
             
             NSArray *lessonDictionaries = [moduleDictionary objectForKey:@"lessons"];
             
@@ -80,8 +226,15 @@
             
             for (NSDictionary *lessonDictionary in lessonDictionaries) {
                 
+                NSUInteger levelIndex = [levelDictionaries indexOfObject:levelDictionary];
+                NSUInteger moduleIndex = [moduleDictionariesArray indexOfObject:moduleDictionary];
+                NSUInteger lessonIndex = [lessonDictionaries indexOfObject:lessonDictionary];
+                
                 Lesson *lesson = [[Lesson alloc] init];
                 [lesson setValuesForKeysWithDictionary:lessonDictionary];
+                
+                // See if there is a results file stored for this lesson...
+                lesson.resultsDictionary = [self readResultsFileForUser:user level:levelIndex module:moduleIndex lesson:lessonIndex];
                 
                 [lessons addObject:lesson];
             }
@@ -97,8 +250,23 @@
     
     self.levels = levelsArray;
 
-    
+    self.viewController.levels = self.levels;
         
+}
+
+- (NSDictionary *)readResultsFileForUser:(NSString *)user level:(NSUInteger)level module:(NSUInteger)module lesson:(NSUInteger)lesson  {
+    
+    NSString *uniqueFile = [NSString stringWithFormat:@"%@_%d_%d_%d.plist",user,level,module,lesson];
+    
+    NSString *path = [[self docDir] stringByAppendingPathComponent:uniqueFile];
+    
+    NSDictionary *stateVectorDict  = [NSDictionary dictionaryWithContentsOfFile:path];
+    
+    NSLog(@"Checking for... %@", uniqueFile);
+    NSLog(@"Found: %@", stateVectorDict);
+
+    return stateVectorDict;
+
 }
 
 

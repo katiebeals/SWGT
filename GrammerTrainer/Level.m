@@ -10,6 +10,6 @@
 
 @implementation Level
 
-@synthesize levelName, modules;
+@synthesize levelName, modules, index;
 
 @end

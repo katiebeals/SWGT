@@ -183,7 +183,7 @@
         NSLog(@"Spreadsheet: %@", [[sheet title] stringValue]);
     }
 
-    NSUInteger indexOfSheet = [self indexOfSpreadSheetNamed:@"Sample"];
+    NSUInteger indexOfSheet = [self indexOfSpreadSheetNamed:@"Grammer-Credentials"];
     
     if (indexOfSheet == NSNotFound) {
         NSLog(@"Could not Find: %@", @"Sample");
@@ -268,8 +268,8 @@
     }
 */
 
-    //[self fetchCellsForWorksheet:1]; // This parameter selects either list(1) or cells(0)
-    [self putCellsForWorksheet:1];
+    [self fetchCellsForWorksheet:1]; // This parameter selects either list(1) or cells(0)
+    //[self putCellsForWorksheet:1];
     
 
 }
@@ -326,9 +326,9 @@
     
     NSString *worksheetName = [[selectedWorksheet title] stringValue];
     
-    NSURL *postURL = [[selectedWorksheet postLink] URL];
+    //NSURL *postURL = [[selectedWorksheet postLink] URL];
     
-    if (worksheetName != nil && postURL != nil) {
+    if (worksheetName != nil) {
         
         // add a 2-column, 3-row table to the selected worksheet
         GDataEntrySpreadsheetTable *newEntry;
@@ -350,13 +350,14 @@
                                                                    name:@"Column Beta"]];
         [newEntry setSpreadsheetData:spData];
         
+        /*
         GDataServiceGoogleSpreadsheet *service = [self spreadsheetService];
         GDataServiceTicket *ticket;
-        
         ticket = [service fetchEntryByInsertingEntry:newEntry
                                           forFeedURL:postURL
                                             delegate:self
                                    didFinishSelector:@selector(addTableTicket:finishedWithEntry:error:)];
+         */
     }
 
 }
@@ -411,14 +412,14 @@
 
 
 
-    /*
+    
     // format list entry data
     //
     // a list entry we will show as a sequence of (name,value) items from
     // the entry's custom elements
      
      // entry table; get a string for the cell or the list item
-    GDataEntryBase *entry = [[mEntryFeed entries] objectAtIndex:0];
+    entry = [[mEntryFeed entries] objectAtIndex:0];
 
     GDataEntrySpreadsheetList *listEntry = (GDataEntrySpreadsheetList *)entry;
     NSDictionary *customElements = [listEntry customElementDictionary];
@@ -433,9 +434,9 @@
         [array addObject:elemStr];
     }
     
-    NSLog(@"Row: %@", [array componentsJoinedByString:@", "] );
+    //NSLog(@"Row: %@", [array componentsJoinedByString:@", "] );
 
-    */
+    
 
      
 }

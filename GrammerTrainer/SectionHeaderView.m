@@ -76,7 +76,7 @@
             [colors addObject:(id)[color CGColor]];
         }
         [(CAGradientLayer *)self.layer setColors:colors];
-        [(CAGradientLayer *)self.layer setLocations:[NSArray arrayWithObjects:[NSNumber numberWithFloat:0.0], [NSNumber numberWithFloat:0.48], [NSNumber numberWithFloat:1.0], nil]];
+        [(CAGradientLayer *)self.layer setLocations:@[@0.0f, @0.48f, @1.0f]];
     }
     
     return self;

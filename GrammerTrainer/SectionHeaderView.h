@@ -16,10 +16,10 @@
 
 @interface SectionHeaderView : UIView 
 
-@property (nonatomic, weak) UILabel *titleLabel;
-@property (nonatomic, weak) UIButton *disclosureButton;
-@property (nonatomic, assign) NSInteger section;
-@property (nonatomic, weak) id <SectionHeaderViewDelegate> delegate;
+@property (assign) UILabel *titleLabel;
+@property (assign) UIButton *disclosureButton;
+@property (assign) NSInteger section;
+@property (assign) id <SectionHeaderViewDelegate> delegate;
 
 -(id)initWithFrame:(CGRect)frame title:(NSString*)title section:(NSInteger)sectionNumber delegate:(id <SectionHeaderViewDelegate>)delegate;
 -(void)toggleOpenWithUserAction:(BOOL)userAction;

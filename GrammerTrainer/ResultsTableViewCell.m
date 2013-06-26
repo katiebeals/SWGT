@@ -10,7 +10,7 @@
 
 @implementation ResultsTableViewCell
 
-@synthesize progressView, descriptionOne, descriptionTwo, scoreLabel;
+@synthesize progressView, descriptionOne, descriptionTwo, redCount, greenCount, checkMark, scoreLabel;
 
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString*)identifier {

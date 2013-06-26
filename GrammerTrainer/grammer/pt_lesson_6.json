@@ -1,0 +1,163 @@
+{
+    "pronounWords": [
+        "it", 
+        "this", 
+        "that", 
+        "they", 
+        "these", 
+        "those"
+    ], 
+    "nounWords": [
+        "a", 
+        "an",
+        "the",
+        "arrow", 
+        "arrows", 
+        "diamond", 
+        "diamonds", 
+        "circle", 
+        "circles", 
+        "oval", 
+        "ovals", 
+        "rectangle", 
+        "rectangles", 
+        "square", 
+        "squares", 
+        "triangle", 
+        "triangles"
+    ], 
+    "exerciseArray": [
+        {
+            "lessonImage": "BlCc.jpg", 
+            "multipleChoice": [
+                "The circle is red.", 
+                "The circle is blue.", 
+                "The circle is yellow.", 
+                "The circle is green."
+            ], 
+            "question": "What color is the circle?", 
+            "answers": [
+                "the circle is blue .", 
+                "the circle's blue .", 
+                "it is blue .", 
+                "it's blue .", 
+                "it is : blue ."
+            ], 
+            "pronounNounLists": [
+                "it,circle,"
+            ], 
+            "subjectRequest": [
+                "circle", 
+                "it", 
+                "they"
+            ]
+        }, 
+        {
+            "lessonImage": "RdSq.jpg", 
+            "multipleChoice": [
+                "The square is yellow.", 
+                "The square is green.", 
+                "The square is red.", 
+                "The square is blue."
+            ], 
+            "question": "What color is the square?", 
+            "answers": [
+                "the square is red .", 
+                "the square's red .", 
+                "it is red .", 
+                "it's red ."
+            ], 
+            "pronounNounLists": [
+                "it,square,"
+            ], 
+            "subjectRequest": [
+                "square", 
+                "it", 
+                "they"
+            ]
+        }, 
+        {
+            "lessonImage": "BlSq.jpg", 
+            "multipleChoice": [
+                "The square is red.", 
+                "The square is blue.", 
+                "The square is green.", 
+                "The square is yellow."
+            ], 
+            "question": "What color is the square?", 
+            "answers": [
+                "the square is blue .", 
+                "the square's blue .", 
+                "it is blue .", 
+                "it's blue ."
+            ], 
+            "pronounNounLists": [
+                "it,square,"
+            ], 
+            "subjectRequest": [
+                "square", 
+                "it", 
+                "they"
+            ]
+        }, 
+        {
+            "lessonImage": "RdCc.jpg", 
+            "multipleChoice": [
+                "The circle is blue.", 
+                "The circle is red.", 
+                "The circle is yellow.", 
+                "The circle is green."
+            ], 
+            "question": "What color is the circle?", 
+            "answers": [
+                "the circle is red .", 
+                "the circle's red .", 
+                "it is red .", 
+                "it's red ."
+            ], 
+            "pronounNounLists": [
+                "it,circle,"
+            ], 
+            "subjectRequest": [
+                "circle", 
+                "it", 
+                "they"
+            ]
+        }, 
+        {
+            "lessonImage": "OrTg.jpg", 
+            "multipleChoice": [
+                "The triangle is orange.", 
+                "The triangle is red.", 
+                "The triangle is green.", 
+                "The triangle is blue."
+            ], 
+            "question": "What color is the triangle?", 
+            "answers": [
+                "the triangle is orange .", 
+                "the triangle's orange .", 
+                "it is orange .", 
+                "it's orange ."
+            ], 
+            "pronounNounLists": [
+                "it,triangle,"
+            ], 
+            "subjectRequest": [
+                "triangle", 
+                "it", 
+                "they"
+            ]
+        }
+    ], 
+    "adjectiveWords": [
+        "blue", 
+        "green", 
+        "orange", 
+        "red", 
+        "yellow"
+    ], 
+    "verbWords": [
+        "is", 
+        "are"
+    ]
+}

@@ -14,7 +14,11 @@
 
 @implementation Module
 
-@synthesize name, lessons;
+@synthesize name, lessons, moduleNumber, index;
 
+- (NSString *)description {
+    
+    return [NSString stringWithFormat:@"name: %@\n lessons:%@ \n moduleNumber:%@ \n", name, lessons, moduleNumber];
+}
 
 @end

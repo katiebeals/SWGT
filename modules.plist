@@ -158,9 +158,9 @@
 						<key>lessonNumber</key>
 						<integer>1</integer>
 						<key>lessonName</key>
-						<string>Direct Speech Int (16) Modeling</string>
+						<string>Lesson 1: Direct Speech</string>
 						<key>topic</key>
-						<string>Telling what people are saying</string>
+						<string>Multiple Choice</string>
 						<key>loadFile</key>
 						<string>pn_lesson_1.json</string>
 						<key>showMultipleChoice</key>
@@ -170,9 +170,9 @@
 						<key>lessonNumber</key>
 						<integer>2</integer>
 						<key>lessonName</key>
-						<string>Direct Speech Int (16)</string>
+						<string>Lesson 1: Direct Speech</string>
 						<key>topic</key>
-						<string>Telling what people are saying</string>
+						<string>Open Choice</string>
 						<key>loadFile</key>
 						<string>pn_lesson_1.json</string>
 						<key>showMultipleChoice</key>
@@ -182,9 +182,9 @@
 						<key>lessonNumber</key>
 						<integer>3</integer>
 						<key>lessonName</key>
-						<string>Direct Speech Gen (16)</string>
+						<string>Lesson 1: Direct Speech</string>
 						<key>topic</key>
-						<string>Telling what people are saying</string>
+						<string>New</string>
 						<key>loadFile</key>
 						<string>pn_lesson_1_gen.json</string>
 						<key>showMultipleChoice</key>
@@ -194,9 +194,9 @@
 						<key>lessonNumber</key>
 						<integer>4</integer>
 						<key>lessonName</key>
-						<string>Indirect Speech Int (16) Modeling</string>
+						<string>Lesson 2: Indirect Speech</string>
 						<key>topic</key>
-						<string>Telling what people are saying with SAYING THAT</string>
+						<string>Multiple Choice</string>
 						<key>loadFile</key>
 						<string>pn_lesson_2.json</string>
 						<key>showMultipleChoice</key>
@@ -206,21 +206,19 @@
 						<key>lessonNumber</key>
 						<integer>5</integer>
 						<key>lessonName</key>
-						<string>Indirect Speech Int (16)</string>
+						<string>Lesson 2: Indirect Speech</string>
 						<key>topic</key>
-						<string>Telling what people are saying with SAYING THAT</string>
+						<string>Open Choice</string>
 						<key>loadFile</key>
 						<string>pn_lesson_2.json</string>
-						<key>showMultipleChoice</key>
-						<string>NO</string>
 					</dict>
 					<dict>
 						<key>lessonNumber</key>
 						<integer>6</integer>
 						<key>lessonName</key>
-						<string>Indirect Speech Gen (16)</string>
+						<string>Lesson 2:Indirect Speech</string>
 						<key>topic</key>
-						<string>Telling what people are saying with SAYING THAT</string>
+						<string>New</string>
 						<key>loadFile</key>
 						<string>pn_lesson_2_gen.json</string>
 						<key>showMultipleChoice</key>
@@ -230,9 +228,9 @@
 						<key>lessonNumber</key>
 						<integer>5</integer>
 						<key>lessonName</key>
-						<string>Mixed Speech Int (32) Modeling</string>
+						<string>Lesson 3: Mixed</string>
 						<key>topic</key>
-						<string>Telling what people are saying with and without SAYING THAT</string>
+						<string>Multiple Choice</string>
 						<key>loadFile</key>
 						<string>pn_lesson_3.json</string>
 						<key>showMultipleChoice</key>
@@ -242,9 +240,9 @@
 						<key>lessonNumber</key>
 						<integer>5</integer>
 						<key>lessonName</key>
-						<string>Mixed Speech Int (32)</string>
+						<string>Lesson 3:Mixed</string>
 						<key>topic</key>
-						<string>Telling what people are saying with and without SAYING THAT</string>
+						<string>Open Choice</string>
 						<key>loadFile</key>
 						<string>pn_lesson_3.json</string>
 						<key>showMultipleChoice</key>
@@ -254,9 +252,9 @@
 						<key>lessonNumber</key>
 						<integer>6</integer>
 						<key>lessonName</key>
-						<string>Mixed Speech Gen (32)</string>
+						<string>Lesson 3:Mixed</string>
 						<key>topic</key>
-						<string>Telling what people are saying with and without SAYING THAT</string>
+						<string>New</string>
 						<key>loadFile</key>
 						<string>pn_lesson_3.json</string>
 						<key>showMultipleChoice</key>
@@ -266,6 +264,5 @@
 			</dict>
 		</array>
 	</dict>
-	
 </array>
 </plist>

@@ -400,7 +400,7 @@
     
     [self layoutIcons:self.levels];
 
-    BOOL yourIn = NO;
+    BOOL youreIn = NO;
     NSDictionary *userInfo = [loginInfo_ objectForKey:user];
     
     
@@ -412,14 +412,14 @@
         
         NSString *realPassWord = [userInfo objectForKey:@"password"];
         if (realPassWord && [password isEqualToString:realPassWord]) {
-            yourIn = YES;
+            youreIn = YES;
         }
         
         // TEMP!
-        yourIn = YES;
+        youreIn = YES;
         
-        if (yourIn) {
-            NSLog(@"Your Ins!");
+        if (youreIn) {
+            NSLog(@"Your In!");
             [self handleCorrectPassword];
         } else {
             [self showWrongPasswordAlert:userName_];
@@ -560,9 +560,9 @@
     NSUInteger iconsPerPage = 4;
 
 	
-	Level *theLevel;
 	
-	for (theLevel in levelsArray) {
+	
+	for (Level *theLevel in levelsArray) {
 		
 		pageIndex = index / iconsPerPage; // Nine icons per page
 		xIndex = index % iconsPerRow + pageIndex * iconsPerRow;
@@ -735,7 +735,6 @@
 
 - (void)synchWithServer {
     
-    
     // Create operation queue
     NSOperationQueue *operationQueue = [NSOperationQueue new];
     // set maximum operations possible
@@ -757,7 +756,6 @@
     
     [operation addObserver:self forKeyPath:@"isFinished" options:NSKeyValueObservingOptionNew context:NULL];
     [operationQueue addOperation:operation]; // operation starts as soon as its added
-
 }
 
 

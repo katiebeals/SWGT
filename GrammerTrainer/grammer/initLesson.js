@@ -219,16 +219,16 @@ function initUserInterface() {
     // checkGender() inits the following variables; him_her,he_she,Him_Her,He_She                          
     checkGender();
     
-    nounWords = theLesson.nounWords;
-    verbWords = theLesson.verbWords;
+    nounWords = theLesson.nounWords.sort();
+    verbWords = theLesson.verbWords.sort();
     
-    //if(typeof theLesson.adjectiveWords != 'undefined') {
-        adjectiveWords = theLesson.adjectiveWords;
-    //}
+    if(typeof theLesson.adjectiveWords != 'undefined') {
+        adjectiveWords = theLesson.adjectiveWords.sort();
+    }
     
-    //if(typeof theLesson.pronounWords != 'undefined') {
-        pronounWords = theLesson.pronounWords;
-    //}
+    if(typeof theLesson.pronounWords != 'undefined') {
+        pronounWords = theLesson.pronounWords.sort();
+    }
 
     //alert("The step is " + step);
     

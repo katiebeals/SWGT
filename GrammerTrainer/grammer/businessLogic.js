@@ -800,6 +800,16 @@ function MajorWords()
 	return new Array("it", "they", "them", "this", "that", "these", "those", "blue", "green", "yellow", "red", "orange", "purple", "call", "help", "girl", "boy", "one", "circle", "square", "triangle", "rectangle", "oval", "elipse", "diamond", "shape", "dot", "spot", "stripe", "top", "bottom", "right", "left", "middle", "inside", "outside", "front", "corner", "edge", "arrow");
 }
 
+//Check for polite mode
+function NotPolite(theFeedbackType)
+{
+    if(theFeedbackType.indexOf("polite") !== -1 && theFeedbackType.indexOf("Polite") !== -1)
+    {
+        return true;
+    }
+    return false;
+}
+
 // Original GT stuff
 function MetaDetermineFeedback()
 {
@@ -867,12 +877,13 @@ function MetaDetermineFeedback()
 	
     //alert("tempNum:" + tempNum);
     
-	// Pinpoints the puntuation at the end of the sentence
+	// Pinpoints the punctuation at the end of the sentence
 	var punctuationPointer = lowerCaseTempSentence.length - 1;
-	// Currect answer without the ending punctuation
+	// Correct answer without the ending punctuation
 	var tempLessonAnswersWithoutPunctuation = lowerCaseTempSentence.slice(0, punctuationPointer);
 	// An array of current answer words
 	var tempAnswersInArray = tempLessonAnswersWithoutPunctuation.split(" ");
+    
     //### using your code, print out the message (which is in html code) and the points
     //depending on what sort of feedback this is, different outputs are necessary
 	if (feedbackType == "CorrectAnswer")
@@ -903,7 +914,7 @@ function MetaDetermineFeedback()
 		//if there are wrong words in the answer, the array wordButtonMarkingInfo tells you which words need to be in red
 		//####your button-changing code goes here!
         //alert("Wrong words.");
-        if( dotMatrix[tempNum] != DOT_CORRECT )
+        if( dotMatrix[tempNum] != DOT_CORRECT && NotPolite(feedbackType))
         {
             if( dotMatrix[tempNum] != DOT_WRONG )
                 promptsToRedo.push(currentExerciseNumber - 1);
@@ -944,7 +955,7 @@ function MetaDetermineFeedback()
 		var convertToPronounList = wordButtonMarkingInfo[1]; //convertToPronounList tells you which words need to be in orange
 		//####your button-changing code goes here!
         //alert("Pronoun Antecedent Feedback.");
-        if( dotMatrix[tempNum] != DOT_CORRECT )
+        if( dotMatrix[tempNum] != DOT_CORRECT && NotPolite(feedbackType) )
         {
             if( dotMatrix[tempNum] != DOT_WRONG )
                 promptsToRedo.push(currentExerciseNumber - 1);
@@ -1000,7 +1011,7 @@ function MetaDetermineFeedback()
         //use GetStem(word) again for this
 		//####your button-changing code goes here!
         //alert("Morphology Feedback.");
-        if( dotMatrix[tempNum] != DOT_CORRECT )
+        if( dotMatrix[tempNum] != DOT_CORRECT && NotPolite(feedbackType) )
         {
             if( dotMatrix[tempNum] != DOT_WRONG )
                 promptsToRedo.push(currentExerciseNumber - 1);
@@ -1106,7 +1117,7 @@ function MetaDetermineFeedback()
 		var nounMissingAnArticleList = wordButtonMarkingInfo[1]; //nounMissingAnArticleList tells you which buttons need to be in orange
 		//####your button-changing code goes here!
         //alert("articleFeedback");
-        if( dotMatrix[tempNum] != DOT_CORRECT )
+        if( dotMatrix[tempNum] != DOT_CORRECT && NotPolite(feedbackType) )
         {
             if( dotMatrix[tempNum] != DOT_WRONG )
                 promptsToRedo.push(currentExerciseNumber - 1);
@@ -1158,7 +1169,7 @@ function MetaDetermineFeedback()
 		var articleIndex = wordButtonMarkingInfo[1]; //tells you which position this word has in the sequence of words that the user inputted (starts at 0)
 		//####your button-changing code goes here!
         //alert("Stranded Article.");
-        if( dotMatrix[tempNum] != DOT_CORRECT )
+        if( dotMatrix[tempNum] != DOT_CORRECT && NotPolite(feedbackType) )
         {
             if( dotMatrix[tempNum] != DOT_WRONG )
                 promptsToRedo.push(currentExerciseNumber - 1);
@@ -1212,7 +1223,7 @@ function MetaDetermineFeedback()
         var missingWordsList = wordButtonMarkingInfo;
         //alert("Missing words: " + missingWordsList);
         
-        if( dotMatrix[tempNum] != DOT_CORRECT )
+        if( dotMatrix[tempNum] != DOT_CORRECT && NotPolite(feedbackType) )
         {
             if( dotMatrix[tempNum] != DOT_WRONG )
                 promptsToRedo.push(currentExerciseNumber - 1);

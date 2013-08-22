@@ -43,10 +43,11 @@
     
     
     // Observe the kNetworkReachabilityChangedNotification. When that notification is posted, the
-    // method "reachabilityChanged" will be called. 
+    // method "reachabilityChanged" will be called.
+    // (BPLL) Checks for internet connection issues vs. specific server issues
     [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(reachabilityChanged:) name: kReachabilityChangedNotification object: nil];
     
-    //Change the host name here to change the server your monitoring
+    //Change the host name here to change the server your monitoring - (BPLL) checks for internet
 	hostReach = [Reachability reachabilityWithHostName: @"www.apple.com"];
 	[hostReach startNotifier];
 
@@ -247,10 +248,8 @@
                 
         [levelsArray addObject:level];
     }
-    
-    self.levels = levelsArray;
 
-    self.viewController.levels = self.levels;
+    self.viewController.levels = self.levels = levelsArray;
         
 }
 

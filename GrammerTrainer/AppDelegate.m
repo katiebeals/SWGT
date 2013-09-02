@@ -261,8 +261,8 @@
     
     NSDictionary *stateVectorDict  = [NSDictionary dictionaryWithContentsOfFile:path];
     
-    NSLog(@"Checking for... %@", uniqueFile);
-    NSLog(@"Found: %@", stateVectorDict);
+   // NSLog(@"Checking for... %@", uniqueFile);
+   // NSLog(@"Found: %@", stateVectorDict);
 
     return stateVectorDict;
 

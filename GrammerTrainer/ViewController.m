@@ -419,7 +419,7 @@
         youreIn = YES;
         
         if (youreIn) {
-            NSLog(@"Your In!");
+            NSLog(@"You Are In!");
             [self handleCorrectPassword];
         } else {
             [self showWrongPasswordAlert:userName_];
@@ -635,7 +635,9 @@
     
     BOOL didCopy = [fileMgr copyItemAtPath:grammerDir toPath:docsDir error:&error];
     
-    NSLog(@"%d: Check For Errors: %@",didCopy, error);
+    NSLog(@"%d: BYR:  Check For Errors: %@",didCopy, error);
+    //NSLog(@"App Directory is: %@", appFolderPath);
+    //NSLog(@"Directory Contents:\n%@", [fileManager directoryContentsAtPath: appFolderPath]);
     
 }
 
@@ -741,10 +743,14 @@
     [operationQueue setMaxConcurrentOperationCount:2];
     
     // Download a bunch of stuff from server
-    NSString *theURL = @"https://dl.dropbox.com/u/26582460/grammerApp/lessonFiles.json";
+   // NSString *theURL = @"https://dl.dropbox.com/u/26582460/grammerApp/lessonFiles.json";
+    
+    NSString *theURL = @"https://www.dropbox.com/sh/lw9mgg18b85usdn/KvVTJUmwbC/lessonFiles.json";
+    
     // https://dl.dropbox.com/u/26582460/grammerApp/lessonFiles.json
     
     // Were just going to download all the files and replace local copies every time - thing about improving this later
+    // DAMN STRAIGHT! -- BYR
     
     // All files when downloaded are simple saved in the same place
     
@@ -802,7 +808,10 @@
                 
                 for (NSString *fileName in fileNames) {
                     
-                    NSString *base = @"https://dl.dropbox.com/u/26582460/grammerApp/";
+                    
+                    NSString *base = @"https://www.dropbox.com/sh/lw9mgg18b85usdn/KvVTJUmwbC/";
+                    
+                   // NSString *base = @"https://dl.dropbox.com/u/26582460/grammerApp/";
 
                     // Download a bunch of stuff from server
                     NSString *theURL = [NSString stringWithFormat:@"%@%@",base,fileName];
@@ -1199,6 +1208,8 @@
     [theQuery appendFormat:@"&questionNumber=%@", [entry objectForKey:@"questionNumber"]];
     [theQuery appendFormat:@"&feedbackType=%@", [entry objectForKey:@"feedbackType"]];
     
+    NSLog(@"Who is Leo Goodwin?");
+    
 	NSString *urlString = [[NSString alloc] initWithFormat:@"http://leo.goodwin.drexel.edu/grammerapp/addGTEvent.php%@", theQuery];
     
     NSString *encodedURL = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
@@ -1276,6 +1287,7 @@
     // 
     
     if ([functionName isEqualToString:@"lessonLoaded"]) {
+        NSLog(@"HELLO!  We are in my copy of the file");
         
         NSLog(@"Did call lessonLoaded");
         [self showMenu];

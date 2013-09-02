@@ -7,8 +7,11 @@ function BlockMove(event)
 $(document).ready(function(){
                   // Grammar tab functionality: shows one category and hides others
                   $('#nounTab').addClass('active');
+                 NSLog(@"will make preposition tab");
+                  $('#prepositionTab').addClass('active');
                   $('#selectedAnswerList>section').hide();
                   $('#nounList').show();
+                  $('#prepositionList').show();
                   
                   
                   $('#answerCategoryTabContainer ul li').click(function(){
@@ -99,6 +102,7 @@ var nounWords;
 var verbWords;
 var adjectiveWords;
 var pronounWords;
+var prepositionWords;
 
 
 // Dot Array
@@ -990,7 +994,8 @@ function MetaDetermineFeedback()
         // Change the background color of wrong words to red
         for( var l = 0; l < fullNPNumbers.length; l++ )
         {
-            $("#answer_" + fullNPNumbers[l]).css("background", "#990000 url(img/watercolorTextureTransparent.png) repeat");
+            //990000
+            $("#answer_" + fullNPNumbers[l]).css("background", "#249123 url(img/watercolorTextureTransparent.png) repeat");
         }
         
         // Change the background color of wrong words to orange
@@ -1152,6 +1157,7 @@ function MetaDetermineFeedback()
         }
         
         // Change the background color of wrong words to red
+        alert ("will change background color of wrong words to red");
         for( var l = 0; l < nounWithWrongArticleNumbers.length; l++ )
         {
             $("#answer_" + nounWithWrongArticleNumbers[l]).css("background", "#990000 url(img/watercolorTextureTransparent.png) repeat");

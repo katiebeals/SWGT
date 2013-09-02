@@ -220,7 +220,11 @@ function initUserInterface() {
     checkGender();
     
     nounWords = theLesson.nounWords.sort();
+    NSLog(@"%@", "WILL PRINT OUT NOUNWORDS NOW");
+    NSLog(@"Found: nounWords: %@", nounWords);
     verbWords = theLesson.verbWords.sort();
+ 
+ 
     
     if(typeof theLesson.adjectiveWords != 'undefined') {
         adjectiveWords = theLesson.adjectiveWords.sort();
@@ -228,6 +232,10 @@ function initUserInterface() {
     
     if(typeof theLesson.pronounWords != 'undefined') {
         pronounWords = theLesson.pronounWords.sort();
+    }
+    
+    if (typeof theLesson.prepositionWords != 'undefined') {
+        prepositionWords = theLesson.prepositionWords.sort();
     }
 
     //alert("The step is " + step);
@@ -371,6 +379,12 @@ function initUserInterface() {
         layoutDraggableWords(document.getElementById('pronounList'), pronounWords, 'pronoun');
     } else {
         $("#pronounTab").hide();
+    }
+    
+    if (typeof prepositionWords != 'undefined') {
+        layoutDraggableWords(document.getELementById('prepositionList'), prepositionWords, 'preposition');
+    } else {
+        $("#prepositionTab").hide();
     }
 
     

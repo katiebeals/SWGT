@@ -13,6 +13,7 @@
 //  
 //  1. The above copyright notice and this permission notice shall be included
 //     in all copies or substantial portions of the Software.
+//
 //  
 //  2. This Software cannot be used to archive or collect data such as (but not
 //     limited to) that of events, news, experiences and activities, for the 
